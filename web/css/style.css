@@ -1,0 +1,125 @@
+/*------------------------- CustomScrollBar.css ---------------------------*/
+::-webkit-scrollbar {
+    width: 5px;
+}
+::-webkit-scrollbar-track {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    margin:5px 0px 5px 0px;
+}
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    background: rgb(219,219,219);
+    background-color: rgba(255, 0, 0, 0.555);
+}
+
+/*------------------------- Global Stuff ---------------------------*/
+h1,h2,h3,h4,h5,h6{
+    font-family: 'Noto Sans TC', sans-serif;
+}
+
+p,a,input,textarea,span,ul,li{
+    font-family: 'Noto Serif TC', serif;
+}
+
+.btn{
+    background-color: red;
+    color: white;
+    padding: 5 19;
+    border-radius: 20px;
+    border-color: white;
+}
+
+/*------------------------- Nav Bar ---------------------------*/
+header nav img{
+    width: 217px;
+    height: 80px;
+}
+
+header nav li{
+    margin: 1 10;
+}
+
+/*------------------------- Intro Section ---------------------------*/
+#intro .jumbotron{
+    height: 65vh;
+    background-position-y: 10%;
+    background-image: url("https://cdn.pixabay.com/photo/2016/03/09/09/22/girl-1245773_1280.jpg");
+    background-size: cover;
+    margin-bottom: 0px;
+}
+
+#intro .container{
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+/*------------------------- Demo Section ---------------------------*/
+#demo{
+    padding: 70px 0;
+}
+
+#demo .badge{
+    background-color: red;
+}
+
+#demo .lead{
+    font-size: 30px;
+    margin-bottom: 5px;
+}
+
+#demo .btn-group{
+    margin: 20px 10px;
+}
+
+#demo .card{
+    margin: 10px 5px;
+}
+
+#demo .card .card-title{
+    height: 65px;
+} 
+
+#demo .card-body{
+    padding: 35px;
+}
+
+#demo .vid{
+    margin: 10px 0px;
+}
+
+#demo .embed-responsive{
+    margin: 10px 0px;
+}
+
+#demo .card-header{
+    background-color: black;
+    border-radius: 25px;
+}
+
+#demo .card .comments img{
+    width: 70px;
+}
+
+/*------------------------- Footer Section ---------------------------*/
+footer{
+    padding: 50px 0;
+	border-top: 1px solid rgba(0,0,0,0.09);
+}
+
+footer img{
+    height: 10vh;
+    margin-bottom: 30px;
+}
+
+footer ul{
+	list-style: none;
+    padding: 0;
+}
+footer p,a,input,textarea,span,ul,li{
+	color: #707070;
+}
