@@ -140,7 +140,7 @@
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="embed-responsive embed-responsive-21by9">
-                                                        <iframe class="embed-responsive-item vid" width="100%" object-fit="cover" :src="'https://www.youtube.com/embed/'+vid.vid" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                                        <iframe :onload="'player'+vid.vid+'=new YT.Player(this)'" class="embed-responsive-item vid" width="100%" object-fit="cover" :src="'https://www.youtube.com/embed/'+vid.vid+'?enablejsapi=1'" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                                     </div>
                                                 </div>
                                             </div>
@@ -148,7 +148,7 @@
                                             <div class="row">
                                                 <div class="col-md-12">
 
-                                                    <div class="accordion" id="accordionExample">
+                                                    <div class="accordion" :id="'accordionExample'+vid.vid">
 
                                                         <div class="card">
                                                           <div class="card-header" id="headingOne">
@@ -159,13 +159,13 @@
                                                             </h2>
                                                           </div>
                                                       
-                                                          <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                                          <div id="collapseOne" class="collapse" aria-labelledby="headingOne" :data-parent="'#accordionExample'+vid.vid">
                                                             <div class="card-body">
                                                                 <ul class="list-group list-group-horizontal-sm">
-                                                                    <li class="list-group-item" href="#">{{{vid.gengs[0].name}}}: {{{vid.gengs[0].time}}}</li>
-                                                                    <li class="list-group-item" href="#">{{{vid.gengs[1].name}}}: {{{vid.gengs[1].time}}}</li>
-                                                                    <li class="list-group-item" href="#">{{{vid.gengs[2].name}}}: {{{vid.gengs[2].time}}}</li>
-                                                                  </ul>
+                                                                    <buttom type="button" class="list-group-item list-group-item-action text-center" :onclick="'player'+vid.vid+'.seekTo('+vid.gengs[0].time+'-3, true)'">{{{vid.gengs[0].name}}}<!--: {{{vid.gengs[0].time-3}}}--></buttom>
+                                                                    <buttom type="button" class="list-group-item list-group-item-action text-center" :onclick="'player'+vid.vid+'.seekTo('+vid.gengs[1].time+'-3, true)'">{{{vid.gengs[1].name}}}<!--: {{{vid.gengs[1].time-3}}}--></buttom>
+                                                                    <buttom type="button" class="list-group-item list-group-item-action text-center" :onclick="'player'+vid.vid+'.seekTo('+vid.gengs[2].time+'-3, true)'">{{{vid.gengs[2].name}}}<!--: {{{vid.gengs[2].time-3}}}--></buttom>
+                                                                </ul>
                                                             </div>
                                                           </div>
                                                         </div>
@@ -178,7 +178,7 @@
                                                               </button>
                                                             </h2>
                                                           </div>
-                                                          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                                                          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" :data-parent="'#accordionExample'+vid.vid">
                                                             <div class="card-body">
                                                                 <img src="img/cloud_test.png" class="img-fluid" alt="Responsive image">
                                                             </div>
