@@ -148,18 +148,17 @@
                                                 <div class="row">
                                                     <div class="col-md-12">
 
-                                                        <div class="accordion" :id="'accordionExample'+vid.vid">
+                                                        <ul class="nav nav-tabs" :id="'myTab'+vid.vid" role="tablist">
+                                                            <li class="nav-item" role="presentation">
+                                                              <a class="nav-link active" :id="'geng-tab'+vid.vid" data-toggle="tab" :href="'#geng'+vid.vid" role="tab" :aria-controls="'geng'+vid.vid" aria-selected="true">梗在這呢</a>
+                                                            </li>
+                                                            <li class="nav-item" role="presentation">
+                                                              <a class="nav-link" :id="'cloud-tab'+vid.vid" data-toggle="tab" :href="'#cloud'+vid.vid" role="tab" :aria-controls="'cloud'+vid.vid" aria-selected="false">大家都說</a>
+                                                            </li>
+                                                        </ul>
 
-                                                            <div class="card">
-                                                            <div class="card-header" id="headingOne">
-                                                                <h2 class="mb-0">
-                                                                <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                                                                    梗在這呢 ...
-                                                                </button>
-                                                                </h2>
-                                                            </div>
-                                                        
-                                                            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" :data-parent="'#accordionExample'+vid.vid">
+                                                        <div class="tab-content" :id="'myTabContent'+vid.vid">
+                                                            <div class="tab-pane fade show active" :id="'geng'+vid.vid" role="tabpanel" :aria-labelledby="'geng-tab'+vid.vid">
                                                                 <div class="card-body">
                                                                     <ul class="list-group list-group-horizontal-sm">
                                                                         <buttom type="button" class="list-group-item list-group-item-action text-center" :onclick="'player'+vid.vid+'.seekTo('+vid.gengs[0].time+'-3, true)'">{{{vid.gengs[0].name}}}<!--: {{{vid.gengs[0].time-3}}}--></buttom>
@@ -168,23 +167,12 @@
                                                                     </ul>
                                                                 </div>
                                                             </div>
-                                                            </div>
 
-                                                            <div class="card">
-                                                            <div class="card-header" id="headingTwo">
-                                                                <h2 class="mb-0">
-                                                                <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                                                    大家都說 ...
-                                                                </button>
-                                                                </h2>
-                                                            </div>
-                                                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" :data-parent="'#accordionExample'+vid.vid">
+                                                            <div class="tab-pane fade" :id="'cloud'+vid.vid" role="tabpanel" :aria-labelledby="'cloud-tab'+vid.vid">
                                                                 <div class="card-body">
                                                                     <img src="img/cloud_test.png" class="img-fluid" alt="Responsive image">
                                                                 </div>
                                                             </div>
-                                                            </div>
-
                                                         </div>
 
                                                     </div>
