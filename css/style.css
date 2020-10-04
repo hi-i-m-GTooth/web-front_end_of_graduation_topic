@@ -105,6 +105,11 @@ header nav li{
     width: 70px;
 }
 
+#demo .card-body .video-data{
+    font-size: 10px;
+    margin-bottom: 8px;
+}
+
 /*------------------------- Footer Section ---------------------------*/
 footer{
     padding: 50px 0;
