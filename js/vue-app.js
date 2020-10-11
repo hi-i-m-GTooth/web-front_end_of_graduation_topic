@@ -1,5 +1,7 @@
 
+
 var vids_url = "../channeled_vids.json";
+
 var vm = new Vue({
     delimiters: ["{{{", "}}}"],
     el: '#app',
@@ -8,7 +10,39 @@ var vm = new Vue({
         vid_num: 0,
     },
     methods: {
+        sendQuery(){
 
+        },
+        testRerender(){
+          this.items = [];
+          this.items.push(
+            {
+              "channel": "最強聯盟",
+              "cid": "UCNooNOGnABoxyDwHuQAH92w",
+              "videos": [
+                {
+                  "vid": "Lf3IAudg6y8",
+                  "positive_rate": "0.46",
+                  "gengs": [
+                    {
+                      "name": "撲殺",
+                      "time": "228",
+                    },
+                    {
+                      "name": "曹蘭",
+                      "time": "635",
+                    },
+                    {
+                      "name": "一旦",
+                      "time": "722",
+                    }
+                  ],
+                  "comments": []
+                }
+              ]
+            }
+          )
+        }
     },
     mounted: function() {
 

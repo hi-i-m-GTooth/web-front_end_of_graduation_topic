@@ -67,6 +67,31 @@ header nav li{
     background-color: red;
 }
 
+#demo .thumbnail.container{
+    width: 90%;
+}
+
+#demo .thumbnail.container a{
+    display:block;
+	position:relative;
+
+	color: #111;
+	padding: 5px;
+	border-radius:3px;
+    transition:all 500ms ease-in-out;
+    border-radius:4px;
+}
+
+#demo-cards:hover img{
+    opacity:0.5;
+}
+
+#demo-cards:hover .thumbnail.container:hover img{
+    transform: scale(1.2);
+    transition: .5s ease;
+    opacity: 1;
+}
+
 #demo .lead{
     font-size: 30px;
     margin-bottom: 5px;
@@ -76,15 +101,23 @@ header nav li{
     margin: 20px 10px;
 }
 
-#demo .card{
+#demo .modal{
     margin: 10px 5px;
 }
 
-#demo .card .card-title{
+#demo .modal-header{
+    padding-left: 50;
+    padding-right: 50;
+    word-wrap: break-word;
+    word-break: break-all;
+    overflow: hidden;
+}
+
+#demo .modal .modal-title{
     height: 65px;
 } 
 
-#demo .card-body{
+#demo .modal-body{
     padding: 35px;
 }
 
@@ -96,16 +129,12 @@ header nav li{
     margin: 10px 0px;
 }
 
-#demo .card-header{
-    background-color: black;
-    border-radius: 25px;
-}
 
-#demo .card .comments img{
+#demo .modal .comments img{
     width: 70px;
 }
 
-#demo .card-body .video-data{
+#demo .modal-body .video-data{
     font-size: 10px;
     margin-bottom: 8px;
 }
