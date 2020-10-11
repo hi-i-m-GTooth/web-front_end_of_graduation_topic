@@ -1,10 +1,12 @@
 <html>
     
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Where Geng</title>
 
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@500&family=Noto+Serif+TC&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@500&family=Noto+Serif+TC&display=swap">
+        <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
         <!-- relative path -->
         <link rel="stylesheet" href="./css/style.css">
         
@@ -19,6 +21,25 @@
 
     <body>
         <div id="app">
+
+            <global>
+
+                <div class="row">
+                    <div class="col-md-1 offset-md-11 text-center" id="sidebar">
+
+                        <div class="col-md-10 offset-md-1">
+                            <header>
+                                <div class='container'>
+                                    <i id='toggle-search' class='icon ion-ios-search'></i>
+                                    <input style='display:none;' id='searchBar' name='search' type='search' placeholder='Search&hellip;'>
+                                </div>
+                            </header>
+                        </div>
+
+                    </div>
+                </div>
+
+            </global>
 
             <header>
 
@@ -363,7 +384,9 @@
         </div>
 
         <!-- relative path -->
+        <!-- relative path -->
         <script type="text/javascript" src="./js/vue-app.js"></script>
+        <script type="text/javascript" src="./js/util.js"></script>
     </body>
 
 
