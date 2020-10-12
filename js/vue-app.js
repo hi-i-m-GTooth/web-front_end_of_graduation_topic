@@ -8,6 +8,7 @@ var vm = new Vue({
     data:{
         items: [],
         vid_num: 0,
+        query: "",
     },
     methods: {
         sendQuery(){

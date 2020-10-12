@@ -201,6 +201,16 @@ header nav li{
     padding: 35px;
 }
 
+#demo .modal-body .like-ratio{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-right: 10px;
+}
+
+#demo .modal-body .like-ratio .progress{
+    margin-top: 4px;
+}
+
 #demo .vid{
     margin: 10px 0px;
 }
@@ -217,6 +227,11 @@ header nav li{
 #demo .modal-body .video-data{
     font-size: 10px;
     margin-bottom: 8px;
+}
+
+#demo .modal-body .video-data .basic-data{
+    margin: 20px;
+    font-size: small;
 }
 
 /*------------------------- Footer Section ---------------------------*/
