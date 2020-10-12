@@ -9,8 +9,12 @@ var vm = new Vue({
         items: [],
         vid_num: 0,
         query: "",
+        mode: false,
     },
     methods: {
+        changeMode(){
+          this.mode = !this.mode;
+        },
         sendQuery(){
 
         },

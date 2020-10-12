@@ -26,8 +26,9 @@ p,a,input,textarea,span,ul,li{
 .btn{
     background-color: red;
     color: white;
-    padding: 5 19;
-    border-radius: 20px;
+    padding: 5 8;
+    margin: 5px;
+    /*border-radius: 20px;*/
     border-color: white;
 }
 
@@ -39,76 +40,8 @@ p,a,input,textarea,span,ul,li{
 }
 
 /* */
-::-webkit-input-placeholder {
-    color: rgba(239, 239, 239, 0.2);
-  }
-  
-  :-moz-placeholder {
-    color: rgba(239, 239, 239, 0.2);
-  }
-  
-  ::-moz-placeholder {
-    color: rgba(239, 239, 239, 0.2);
-  }
-  
-  :-ms-input-placeholder {
-    color: rgba(239, 239, 239, 0.2);
-  }
-  
-  global header {
-    background-color: #1f1f1f;
-    padding: 1em 0;
-    color: rgba(239, 239, 239, 0.3);
-    font-size: 18pt;
-  }
-  
-  global header .ion-navicon,
-  global header #toggle-search {
-    -webkit-transition: all 0.6s ease;
-    -moz-transition: all 0.6s ease;
-    transition: all 0.6s ease;
-  }
-  
-  global header .ion-navicon:hover,
-  global header #toggle-search:hover {
-    color: #efefef;
-  }
-  
-  global header .ion-navicon {
-    float: left;
-  }
-  
-  global header span {
-    font-weight: 100;
-    margin-left: 0;
-  }
-  
-  @media screen and (min-width: 320px) {
-    global header span {
-      margin-left: 10px;
-    }
-  }
-  
-  global header #searchBar {
-    background-color: #2f2f2f;
-    border: none;
-    color: rgba(239, 239, 239, 0.5);
-    font-size: 12pt;
-    font-weight: 100;
-    margin-right: 10px;
-    padding: .25em .75em;
-    float: right;
-    max-width: 130px;
-    text-align: right;
-    -webkit-border-radius: 28px;
-    -moz-border-radius: 28px;
-    border-radius: 28px;
-  }
-  
-  global header #toggle-search {
-    float: right;
-  }
-  /**/
+
+/* */
   
 
 /*------------------------- Nav Bar ---------------------------*/
