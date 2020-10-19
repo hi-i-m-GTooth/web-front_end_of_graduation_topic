@@ -16,7 +16,18 @@ var vm = new Vue({
           this.mode = !this.mode;
         },
         sendQuery(){
-
+          console.log('Send Query!');
+          //var globalthis=this;
+          fetch('https://reqres.in/api/users',{
+            method: 'GET',
+            //mode: 'no-cors',
+          })
+          .then(res => {
+            return res.json();
+          })
+          .then(result => {
+            console.log(result);
+          })
         },
         testRerender(){
           this.items = [];
