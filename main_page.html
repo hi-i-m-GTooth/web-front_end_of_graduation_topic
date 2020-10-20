@@ -105,9 +105,9 @@
                             <div class="col-md-8 offset-md-2 text-center">
                                 <h2 class="lead"><span class="badge badge-primary">Youtube</span> 影片</h2>
                             </div>
-
+                             <!--以下是mode==0 ，關鍵字推薦模式-->
                             <div class="container tool-bar">
-                                <div v-if="mode" class="row justify-content-center">
+                                <div v-if="mode==0" class="row justify-content-center">
                                     <button class="col-md-1 btn btn-outline-dark " @click="changeMode">
                                         <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                             <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
@@ -127,8 +127,8 @@
                                         <button type="button" class="btn btn-secondary">保留10</button>
                                     </div>
                                 </div>
-
-                                <div v-else class="container search-bar">
+                                <!--以下是mode==1 ，搜尋模式-->
+                                <div v-if="mode==1"  class="container search-bar">
                                     
                                     <div class="row justify-content-center">
                                         
@@ -143,10 +143,28 @@
                                     </div>
              
                                 </div>
+                                <!-- 以下是mode==2  拉桿模式 -->
+                                <div v-if="mode==2" class="container tool-bar">
+                                    <div class="row justify-content-center">
+                                        
+                                            <button class="col-md-1 btn btn-outline-dark " @click="changeMode">
+                                                <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-toggles" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" d="M4.5 9a3.5 3.5 0 1 0 0 7h7a3.5 3.5 0 1 0 0-7h-7zm7 6a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5zm-7-14a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zm2.45 0A3.49 3.49 0 0 1 8 3.5 3.49 3.49 0 0 1 6.95 6h4.55a2.5 2.5 0 0 0 0-5H6.95zM4.5 0h7a3.5 3.5 0 1 1 0 7h-7a3.5 3.5 0 1 1 0-7z"/>
+                                                </svg>
+                                                
+                                            </button>
+                                            <div class="row justify-content-center">
+                                            <label>{{{rangeOutput}}}</label>
+                                            <input type="range" class="custom-range" min="0" max="4" id="customRange2" @change="updateRangeValue($event)">
+                                            <button class="col-md-2 btn btn-outline-dark" type="submit" @click="sendQuery">submit</button>
+                                            </div>
+                                    </div>
+                                </div>
+
                             </div>
 
                         </div>
-
+                        <!--呈現結果部分-->
                                 
                         <div id="demo-cards" class="container">
                             

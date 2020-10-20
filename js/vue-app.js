@@ -9,11 +9,44 @@ var vm = new Vue({
         items: [],
         vid_num: 0,
         query: "",
-        mode: false,
+        
+
+        mode: 0,
+        // mode : 當前mode
+
+        // 0 : 關鍵字推薦模式
+        // 1 : 搜尋模式
+        // 2 : 拉桿推薦模式 
+        allMode: 3,  
+        //allMode: 所有mode數量 
+        rangeOutput: "拉桿",
+        //讓使用者知道當前拉桿值
     },
     methods: {
-        changeMode(){
-          this.mode = !this.mode;
+        //綁定於mode=2 的拉桿，用於呈現數值變化
+        updateRangeValue(event){
+          let val = event.target.value;  // 回傳event這個物件，要的value在target裡
+          if (val == 0){
+            this.rangeOutput = "嚴肅";
+          }
+          else if (val == 1){
+            this.rangeOutput = "稍微嚴肅";
+          }
+          else if (val == 2){
+            this.rangeOutput = "中立";
+          }
+          else  if (val == 3){
+            this.rangeOutput = "稍微娛樂";
+          }
+          else  if (val == 4){
+            this.rangeOutput = "娛樂";
+          }
+        },
+        changeMode(){  
+          //綁定於 button class="col-md-1 btn btn-outline-dark "  
+          //按下會更動網頁mode 
+          this.mode = (this.mode+1)%this.allMode ;
+         
         },
         sendQuery(){
           console.log('Send Query!');
