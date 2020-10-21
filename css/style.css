@@ -44,6 +44,9 @@ p,a,input,textarea,span,ul,li{
 /* */
   
 
+
+
+
 /*------------------------- Nav Bar ---------------------------*/
 header nav img{
     width: 217px;
@@ -75,6 +78,36 @@ header nav li{
 #demo{
     padding: 70px 0;
 }
+
+/*-------------------------Fix tool bar size ----------------------*/
+#demo .container{
+    text-align: center;
+
+}
+
+#demo .row .justify-content-center{
+    padding: 20px 0;    /*調整bar空間的高度*/
+    text-align: center;
+}
+
+
+
+#demo .tool-bar-interact{
+    margin: 10px 10px;   /* height ; width  也會連帶影響bar大小*/
+    width:1000px;
+    height:50px;
+    text-align: center;
+
+}
+
+.btn-change-mode {
+    width:50px;
+    height:100px;
+
+}
+
+/*-----------------------------------------------------------------*/
+
 
 #demo .badge{
     background-color: red;
@@ -110,9 +143,7 @@ header nav li{
     margin-bottom: 5px;
 }
 
-#demo .btn-group{
-    margin: 20px 10px;
-}
+
 
 #demo .modal{
     margin: 10px 5px;

@@ -108,13 +108,16 @@
                              <!--以下是mode==0 ，關鍵字推薦模式-->
                             <div class="container tool-bar">
                                 <div v-if="mode==0" class="row justify-content-center">
-                                    <button class="col-md-1 btn btn-outline-dark " @click="changeMode">
+                                    
+                                    <button class="col-md-1 btn btn-change-mode " @click="changeMode">
+
                                         <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                             <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
                                             <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
                                           </svg>
                                     </button>
-                                    <div class="btn-group col-md-10" role="group" aria-label="Basic example">
+                                    
+                                    <div class="tool-bar-interact " role="group" aria-label="Basic example">
                                         <button type="button" class="btn btn-secondary" @click="testRerender">電競</button>
                                         <button type="button" class="btn btn-secondary">保留2</button>
                                         <button type="button" class="btn btn-secondary">保留3</button>
@@ -128,38 +131,41 @@
                                     </div>
                                 </div>
                                 <!--以下是mode==1 ，搜尋模式-->
-                                <div v-if="mode==1"  class="container search-bar">
+                       
                                     
-                                    <div class="row justify-content-center">
-                                        
-                                            <button class="col-md-1 btn btn-outline-dark " @click="changeMode">
+                                 <div v-if="mode==1" class="row justify-content-center">
+                                            
+                                            <button class="col-md-1 btn btn-change-mode " @click="changeMode">
                                                 <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-columns-gap" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                                     <path fill-rule="evenodd" d="M6 1H1v3h5V1zM1 0a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1H1zm14 12h-5v3h5v-3zm-5-1a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1h-5zM6 8H1v7h5V8zM1 7a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1H1zm14-6h-5v7h5V1zm-5-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1h-5z"/>
                                                 </svg>
                                             </button>
-                                            <input v-model="query" class="col-md-8 form-control form-control-lg" type="search" placeholder="Search" aria-label="Search">
+                                       
+                                            <!--可由col-md-n 直接寬度調整大小-->
+                                            <div class="tool-bar-interact ">
+                                            <input id="search" v-model="query" class="col-md-12 form-control form-control-lg" type="search" placeholder="--Search Here--" aria-label="Search" >
                                             <button class="col-md-2 btn btn-outline-dark" type="submit" @click="sendQuery">Search</button>
-                                        
+                                            </div>
                                     </div>
              
-                                </div>
+                    
                                 <!-- 以下是mode==2  拉桿模式 -->
-                                <div v-if="mode==2" class="container tool-bar">
-                                    <div class="row justify-content-center">
+                            
+                                    <div v-if="mode==2" class="row justify-content-center">
                                         
-                                            <button class="col-md-1 btn btn-outline-dark " @click="changeMode">
+                                            <button class="col-md-1 btn btn-change-mode " @click="changeMode">
                                                 <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-toggles" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                                 <path fill-rule="evenodd" d="M4.5 9a3.5 3.5 0 1 0 0 7h7a3.5 3.5 0 1 0 0-7h-7zm7 6a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5zm-7-14a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zm2.45 0A3.49 3.49 0 0 1 8 3.5 3.49 3.49 0 0 1 6.95 6h4.55a2.5 2.5 0 0 0 0-5H6.95zM4.5 0h7a3.5 3.5 0 1 1 0 7h-7a3.5 3.5 0 1 1 0-7z"/>
                                                 </svg>
                                                 
                                             </button>
-                                            <div class="row justify-content-center">
+                                            <div class="tool-bar-interact ">
                                             <label>{{{rangeOutput}}}</label>
                                             <input type="range" class="custom-range" min="0" max="4" id="customRange2" @change="updateRangeValue($event)">
                                             <button class="col-md-2 btn btn-outline-dark" type="submit" @click="sendQuery">submit</button>
                                             </div>
                                     </div>
-                                </div>
+                             
 
                             </div>
 
