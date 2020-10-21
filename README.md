@@ -1,12 +1,12 @@
 # Work log
-### 10.20
+### First commit
 * add comments  
 * add README  
 * add range in main_page.html (need to be adjusted typesetting )  
 * add updateRangeValue in vue.js-method to show user what they selected 
 * modify data in vue.js-data and add allmode variable in order to maintain mode switching  
 
-### 10.21  TypeSetting
+### Fix tool bar 
 * modify some id to make its name more explict
 (ex: btn-change-mode)
 * add div tag for typesetting
