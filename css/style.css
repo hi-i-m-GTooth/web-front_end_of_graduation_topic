@@ -58,13 +58,7 @@ header nav li{
 }
 
 /*------------------------- Intro Section ---------------------------*/
-#intro .jumbotron{
-    height: 65vh;
-    background-position-y: 10%;
-    background-image: url("https://cdn.pixabay.com/photo/2016/03/09/09/22/girl-1245773_1280.jpg");
-    background-size: cover;
-    margin-bottom: 0px;
-}
+
 
 #intro .container{
     position: relative;
@@ -106,6 +100,38 @@ header nav li{
 
 }
 
+/*-----------------------------------------------------------------*/
+
+/* tesing for intro */
+/* jumbotron -> carousel-item-1 */
+/*#intro .carousel-inner{
+    height: 70vh;
+    background-position-y: 10%;
+  /*  background-image: url("https://cdn.pixabay.com/photo/2016/03/09/09/22/girl-1245773_1280.jpg"); 
+    background-size: cover;
+    margin-bottom: 0px;
+}
+*/
+.carousel .carousel-item {
+  height: 600px;
+}
+
+.carousel-item img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-height: 300px;
+}
+
+.carousel-content {
+  position: absolute;
+  bottom: 60%;  /* text heigh in img */
+  left: 5%;
+  z-index: 50;
+  color: black;
+  font-size:50px;
+  /*text-shadow: 0 1px 2px rgba(0,0,0,.6);*/
+}
 /*-----------------------------------------------------------------*/
 
 

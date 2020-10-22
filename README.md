@@ -13,7 +13,8 @@
 (ex: tool-bar-interact)
 * add CSS in "Fix tool bar size" section
 
-
+### Add slider (test)
+* modify static background image to slider 
 
 # Note
 ### bootstrap
