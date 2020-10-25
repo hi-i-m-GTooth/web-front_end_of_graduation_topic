@@ -13,8 +13,17 @@
 (ex: tool-bar-interact)
 * add CSS in "Fix tool bar size" section
 
-### Add slider (test)
+### Add slider 
 * modify static background image to slider 
+
+### Add random cold start 
+* in vue.js mounted function，implement shuffle algorithm to get n random videos
+
+### split json from vue.js (in js/data.js)
+* As title
+
+
+
 
 # Note
 ### bootstrap
@@ -30,5 +39,11 @@ One of feature in bootstrap
 By controlling "n" in tag (class = "col-md-n")，we can determine width of component.  
 * Note: weight col-md-n > CSS 
 
+### How to split data
+把 json 令一個變數，如test_data
+然後改名成.js 
+最後vue.js中用items:test_data之類的就可以取用了
 
+And remember to include data.js in html  
+by adding  `<script type="text/javascript" src="js/data.js"></script> `
 
