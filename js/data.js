@@ -1,4 +1,4 @@
-test_data = {
+var test_data = {
             "channel": "伯恩夜夜秀",
             "cid": "UCDrswN-SqWh7Kii62h9aXGA",
             "videos": [
@@ -1605,4 +1605,10 @@ test_data = {
               }
             ]
           }
-    
+
+var keyword = {
+  "豬瘟" : "6YQaXRzyTPk",
+  "育嬰" : "Cf4A50LT3AQ",
+  "選主席":"cfKdekQdOAQ"
+
+}

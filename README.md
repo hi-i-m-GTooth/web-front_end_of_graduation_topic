@@ -22,6 +22,10 @@
 ### split json from vue.js (in js/data.js)
 * As title
 
+### Generalize keyword recommend 
+* modify button by v-for="(key,vid) in keyword" to generate keyword button
+* NEED to add random function
+* WARNING: old verson json does NOT support this function 
 
 
 
