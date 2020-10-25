@@ -171,18 +171,13 @@
                                             <p>切換搜尋</p>
                                           </svg>
                                     </button>
-                                    
-                                    <div class="tool-bar-interact " role="group" aria-label="Basic example">
-                                        <button type="button" class="btn btn-secondary" @click="testRerender">電競</button>
-                                        <button type="button" class="btn btn-secondary">保留2</button>
-                                        <button type="button" class="btn btn-secondary">保留3</button>
-                                        <button type="button" class="btn btn-secondary">保留4</button>
-                                        <button type="button" class="btn btn-secondary">保留5</button>
-                                        <button type="button" class="btn btn-secondary">保留6</button>
-                                        <button type="button" class="btn btn-secondary">保留7</button>
-                                        <button type="button" class="btn btn-secondary">保留8</button>
-                                        <button type="button" class="btn btn-secondary">保留9</button>
-                                        <button type="button" class="btn btn-secondary">保留10</button>
+                                    <!-- 泛化關鍵字搜尋產生 -->
+                                    <!-- 之後再使用隨機生成n個即可 -->
+                                    <div class=" tool-bar-interact " role="group" aria-label="Basic example">
+                        
+                                            <button v-for="(vid,key) in keyword" type="button" class="col-md-2 btn btn-secondary"@click="keyWordRecommend(vid)">{{{key}}}</button>
+                                         
+                        
                                     </div>
                                 </div>
                                 <!--以下是mode==1 ，搜尋模式-->
@@ -218,6 +213,7 @@
                                             <div class="tool-bar-interact ">
                                             <label>{{{rangeOutput}}}</label>
                                             <input type="range" class="custom-range" min="0" max="4" id="customRange2" @change="updateRangeValue($event)">
+                                            <!--傳參數方法 -->
                                             <button class="col-md-2 btn btn-outline-dark" type="submit" @click="sendQuery">submit</button>
                                             </div>
                                     </div>

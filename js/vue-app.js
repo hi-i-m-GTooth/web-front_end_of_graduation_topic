@@ -5,6 +5,8 @@ var vm = new Vue({
     el: '#app',
     data:{
         items:test_data,  //測試分隔檔案
+        keyword:keyword,
+
         vid_num: 0,
         query: "",
         
@@ -60,35 +62,16 @@ var vm = new Vue({
             console.log(result);
           })
         },
-        testRerender(){
+        keyWordRecommend(receive){
+        //  console.log(typeof receive);
           this.items = [];
           this.items.push(
             {
-              "channel": "最強聯盟",
-              "cid": "UCNooNOGnABoxyDwHuQAH92w",
-              "videos": [
-                {
-                  "vid": "Lf3IAudg6y8",
-                  "positive_rate": "0.46",
-                  "gengs": [
-                    {
-                      "name": "撲殺",
-                      "time": "228",
-                    },
-                    {
-                      "name": "曹蘭",
-                      "time": "635",
-                    },
-                    {
-                      "name": "一旦",
-                      "time": "722",
-                    }
-                  ],
-                  "comments": []
-                }
-              ]
+              "channel": "伯恩夜夜秀",
+              "cid": "UCDrswN-SqWh7Kii62h9aXGA",
+              "videos": [test_data["videos"][0]]
             }
-          )
+            )
         }
       },
 
