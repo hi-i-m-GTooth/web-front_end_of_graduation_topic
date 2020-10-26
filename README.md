@@ -27,7 +27,9 @@
 * NEED to add random function
 * WARNING: old verson json does NOT support this function 
 
-
+### Fix API error
+* modify sendQuery() function
+* add new variable - query_api
 
 # Note
 ### bootstrap
