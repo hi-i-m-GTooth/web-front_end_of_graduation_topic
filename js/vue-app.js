@@ -5,6 +5,7 @@ var vm = new Vue({
     el: '#app',
     data:{
         items:test_data,  //測試分隔檔案
+        tmp_items:[],
         keyword:keyword,
 
         vid_num: 0,
@@ -23,6 +24,12 @@ var vm = new Vue({
         //讓使用者知道當前拉桿值
     },
     methods: {
+        consoleTest(text){
+          console.log(text);
+        },
+        returnTmp(){
+          this.items = this.tmp_items;
+        },
         //綁定於mode=2 的拉桿，用於呈現數值變化
         updateRangeValue(event){
           let val = event.target.value;  // 回傳event這個物件，要的value在target裡
@@ -72,7 +79,16 @@ var vm = new Vue({
               "videos": [test_data["videos"][0]]
             }
             )
-        }
+        },
+        wordcloudWeight(_weight){
+          var weight = _weight*100;
+          if(weight<30){
+            return 30;
+          }
+          else{
+            return weight;
+          }
+        },
       },
 
 
@@ -105,6 +121,7 @@ var vm = new Vue({
        
 
           this.items.push(res);
+          this.tmp_items.push(res);
           
           console.log("hello world");
     },

@@ -9,11 +9,11 @@
         <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
         <!-- relative path -->
         <link rel="stylesheet" href="./css/style.css">
+        <link rel="stylesheet" href="./css/wordcloud.css">
         
 
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-        <!--<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>-->
-        <script 
+        <!--<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>--> 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
@@ -156,9 +156,10 @@
 
                         <div class="row">
 
-                            <div class="col-md-8 offset-md-2 text-center">
-                                <h2 class="lead"><span class="badge badge-primary">Youtube</span> 影片</h2>
+                            <div class="col-md-8 offset-md-2 text-center" @click="returnTmp();">
+                                <h2 class="lead"><span class="badge badge-primary" style="padding: 10;">Youtube</span> 影片</h2>
                             </div>
+
                              <!--以下是mode==0 ，關鍵字推薦模式-->
                             <div class="container tool-bar">
                                 <div v-if="mode==0" class="row justify-content-center">
@@ -169,13 +170,13 @@
                                             <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
                                             <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
                                             <p>切換搜尋</p>
-                                          </svg>
+                                        </svg>
                                     </button>
                                     <!-- 泛化關鍵字搜尋產生 -->
                                     <!-- 之後再使用隨機生成n個即可 -->
                                     <div class=" tool-bar-interact " role="group" aria-label="Basic example">
                         
-                                            <button v-for="(vid,key) in keyword" type="button" class="col-md-2 btn btn-secondary"@click="keyWordRecommend(vid)">{{{key}}}</button>
+                                            <button v-for="(vid,key) in keyword" type="button" class="col-md-2 btn btn-secondary" @click="keyWordRecommend(vid)">{{{key}}}</button>
                                          
                         
                                     </div>
@@ -222,25 +223,48 @@
                             </div>
 
                         </div>
+
+                        <hr/>
+
                         <!--呈現結果部分-->
-                                
                         <div id="demo-cards" class="container">
                             
                             <div v-for="(channel, index) in items" :key='channel.cid'>
                                 <div class=row>
-                                    <div class="col-md-6" v-for="vid in channel.videos" :key="vid.vid">
-                                            
-                                        <div class="card preview">
-                                            <div class="card-body">
-                                                
-                                                <div class="row">
-                                                    <div class="thumbnail container">
-                                                        <a :title="vid.vid">
-                                                            <img :src="'https://img.youtube.com/vi/'+vid.vid+'/hqdefault.jpg'" class="img-fluid img-thumbnail" alt="Responsive image" data-toggle="modal" :data-target="'#modalCenter_'+vid.vid">
-                                                            <h2>{{{vid.vid}}}</h2>
-                                                        </a>
+                                    <div class="proto col-md-12" v-for="vid in channel.videos" :key="vid.vid">
+                                        
+                                        <div class="media" data-toggle="modal" :data-target="'#modalCenter_'+vid.vid">
+                                            <img :src="'https://img.youtube.com/vi/'+vid.vid+'/hqdefault.jpg'" width="263px" class="img-fluid" alt="Responsive image">
+                                            <div class="media-body" style="margin-left: 10;">
+                                              <h5 class="mt-0">{{{vid.title}}}</h5>
+
+                                              <div class="row basic-data font-weight-bolder" style="padding: 5 10;">
+
+                                                    <p class="col-md-3">觀看次數: 9999999 次</p>
+                                                    
+                                                    <p class="col-md-3">首播日期: 2019/07/09</p>
+                                    
+                                                    <div class="col-md-3 offset-md-3 text-right text-nowrap">
+                                                        <svg width="1.5em" height="1.8em" viewBox="0 0 16 16" class="bi bi-hand-thumbs-up" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                            <path fill-rule="evenodd" d="M6.956 1.745C7.021.81 7.908.087 8.864.325l.261.066c.463.116.874.456 1.012.965.22.816.533 2.511.062 4.51a9.84 9.84 0 0 1 .443-.051c.713-.065 1.669-.072 2.516.21.518.173.994.681 1.2 1.273.184.532.16 1.162-.234 1.733.058.119.103.242.138.363.077.27.113.567.113.856 0 .289-.036.586-.113.856-.039.135-.09.273-.16.404.169.387.107.819-.003 1.148a3.163 3.163 0 0 1-.488.901c.054.152.076.312.076.465 0 .305-.089.625-.253.912C13.1 15.522 12.437 16 11.5 16v-1c.563 0 .901-.272 1.066-.56a.865.865 0 0 0 .121-.416c0-.12-.035-.165-.04-.17l-.354-.354.353-.354c.202-.201.407-.511.505-.804.104-.312.043-.441-.005-.488l-.353-.354.353-.354c.043-.042.105-.14.154-.315.048-.167.075-.37.075-.581 0-.211-.027-.414-.075-.581-.05-.174-.111-.273-.154-.315L12.793 9l.353-.354c.353-.352.373-.713.267-1.02-.122-.35-.396-.593-.571-.652-.653-.217-1.447-.224-2.11-.164a8.907 8.907 0 0 0-1.094.171l-.014.003-.003.001a.5.5 0 0 1-.595-.643 8.34 8.34 0 0 0 .145-4.726c-.03-.111-.128-.215-.288-.255l-.262-.065c-.306-.077-.642.156-.667.518-.075 1.082-.239 2.15-.482 2.85-.174.502-.603 1.268-1.238 1.977-.637.712-1.519 1.41-2.614 1.708-.394.108-.62.396-.62.65v4.002c0 .26.22.515.553.55 1.293.137 1.936.53 2.491.868l.04.025c.27.164.495.296.776.393.277.095.63.163 1.14.163h3.5v1H8c-.605 0-1.07-.081-1.466-.218a4.82 4.82 0 0 1-.97-.484l-.048-.03c-.504-.307-.999-.609-2.068-.722C2.682 14.464 2 13.846 2 13V9c0-.85.685-1.432 1.357-1.615.849-.232 1.574-.787 2.132-1.41.56-.627.914-1.28 1.039-1.639.199-.575.356-1.539.428-2.59z"/>
+                                                        </svg> 10.1k
+                                                    </div>
+
+                                                </div>
+
+                                                <!-- 注意!!!非真正娛樂值!!! -->
+                                                <div class="row like-ratio" style="margin: 20 0;">
+                                                    <div class="col-md-3 text-center">
+                                                        <a>娛樂值</a>
+                                                    </div>
+
+                                                    <div class="col-md-9">
+                                                        <div class="progress">
+                                                            <div class="progress-bar bg-danger" role="progressbar" :style="'width:'+vid.positive_rate*100+'%'" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                                        </div>
                                                     </div>
                                                 </div>
+
                                             </div>
                                         </div>
 
@@ -321,7 +345,13 @@
                                                                     <div class="tab-pane fade" :id="'cloud'+vid.vid" role="tabpanel" :aria-labelledby="'cloud-tab'+vid.vid">
                                                                         <div class="modal-body">
                                                                             <!-- relative path -->
-                                                                            <img src="img/cloud_test.png" class="img-fluid" alt="Responsive image">
+                                                                            <svg id="tagi" class="img-fluid" alt="Responsive image" x="0px" y="0px" width="100%" height="324px" viewBox="0 0 920 324">
+                                                                                <text transform="matrix(1 0 0 1 188.187 130.3555)" :style="'font-size: '+wordcloudWeight(vid.wordcloud[0].weight)+';font-weight:'+ wordcloudWeight(vid.wordcloud[0].weight)*17 +';' " class="st5 st17 st22" @click="consoleTest('123');">{{{vid.wordcloud[0].name}}}</text>
+                                                                                <text transform="matrix(1 0 0 1 450.8301 145.1353)" :style="'font-size: '+wordcloudWeight(vid.wordcloud[1].weight)+';font-weight:'+ wordcloudWeight(vid.wordcloud[1].weight)*17 +';' " class="st17 st29">{{{vid.wordcloud[1].name}}}</text>
+                                                                                <text transform="matrix(1 0 0 1 472.4722 75.3691)" :style="'font-size: '+wordcloudWeight(vid.wordcloud[2].weight)+';font-weight:'+ wordcloudWeight(vid.wordcloud[2].weight)*17 +';' " class="st5 st28 st24">{{{vid.wordcloud[2].name}}}</text>
+                                                                                <text transform="matrix(1 0 0 1 663.5552 139.2856)" :style="'font-size: '+wordcloudWeight(vid.wordcloud[3].weight)+';font-weight:'+ wordcloudWeight(vid.wordcloud[3].weight)*17 +';' " class="st5 st28 st3">{{{vid.wordcloud[3].name}}}</text>
+                                                                                <text transform="matrix(1 0 0 1 375.8022 230.5303)" :style="'font-size: '+wordcloudWeight(vid.wordcloud[4].weight)+';font-weight:'+ wordcloudWeight(vid.wordcloud[4].weight)*17 +';' " class="st17 st2">{{{vid.wordcloud[4].name}}}</text>
+                                                                            </svg>
                                                                         </div>
                                                                     </div>
                                                                 </div>

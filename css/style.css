@@ -144,7 +144,7 @@ header nav li{
     width: 90%;
 }
 
-#demo .thumbnail.container a{
+#demo .media p{
     display:block;
 	position:relative;
 
@@ -155,13 +155,28 @@ header nav li{
     border-radius:4px;
 }
 
+#demo-cards .media{
+    margin-bottom: 5px;
+    margin-top: 5px;
+    background-color: rgb(252, 235, 221);
+    padding: 2 0;
+}
+
 #demo-cards:hover img{
     opacity:0.5;
 }
 
-#demo-cards:hover .thumbnail.container:hover img{
+#demo-cards:hover .media{
+    opacity:0.5;
+}
+
+#demo-cards:hover .proto:hover .media{
     transform: scale(1.2);
     transition: .5s ease;
+    opacity: 1;
+}
+
+#demo-cards:hover .proto:hover img{
     opacity: 1;
 }
 
