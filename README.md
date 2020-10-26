@@ -27,7 +27,16 @@
 * NEED to add random function
 * WARNING: old verson json does NOT support this function 
 
+### Fix API error
+* modify sendQuery() function
+* add new variable - query_api
 
+### Change the Way to Demo
+* modify the demo part to present in list
+* boost the experience of enlarge-hover
+
+### Add Split Word Cloud
+* Words are vary in Font-size & Font-weight depends on their wordcloud-weight (Proportional)
 
 # Note
 ### bootstrap

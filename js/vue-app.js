@@ -10,7 +10,7 @@ var vm = new Vue({
 
         vid_num: 0,
         query: "",
-        
+        query_api: "http://127.0.01:8000/test?queryname=",
 
         mode: 0,
         // mode : 當前mode
@@ -49,28 +49,30 @@ var vm = new Vue({
             this.rangeOutput = "娛樂";
           }
         },
+
         changeMode(){  
           //綁定於 button class="col-md-1 btn btn-outline-dark "  
           //按下會更動網頁mode 
           this.mode = (this.mode+1)%this.allMode ;
          
         },
+
         sendQuery(){
           console.log('Send Query!');
-          //var globalthis=this;
-          fetch('https://reqres.in/api/users',{
+          query_url = query_api+query;
+          
+          fetch(query_url, {
             method: 'GET',
-            //mode: 'no-cors',
           })
           .then(res => {
             return res.json();
           })
-          .then(result => {
-            console.log(result);
+          .then(myJson => {
+            console.log(myJson);
           })
         },
+
         keyWordRecommend(receive){
-        //  console.log(typeof receive);
           this.items = [];
           this.items.push(
             {
