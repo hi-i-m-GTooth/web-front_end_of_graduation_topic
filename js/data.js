@@ -1553,9 +1553,3 @@ var test_data = {
             ]
           }
 
-var keyword = {
-  "豬瘟" : "6YQaXRzyTPk",
-  "育嬰" : "Cf4A50LT3AQ",
-  "選主席":"cfKdekQdOAQ"
-
-}
