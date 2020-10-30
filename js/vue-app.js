@@ -24,12 +24,18 @@ var vm = new Vue({
         //讓使用者知道當前拉桿值
     },
     methods: {
+
         consoleTest(text){
           console.log(text);
         },
         returnTmp(){
           this.items = this.tmp_items;
         },
+
+                          /** interaction component **/
+        //==============================================================//
+        //==============================================================//
+     
         //綁定於mode=2 的拉桿，用於呈現數值變化
         updateRangeValue(event){
           let val = event.target.value;  // 回傳event這個物件，要的value在target裡
@@ -57,7 +63,15 @@ var vm = new Vue({
          
         },
 
-        sendQuery(){
+        //==============================================================//
+        //==============================================================//
+
+
+                        /** communicate with back-end **/
+        
+        //==============================================================//
+        //==============================================================//
+        sendKeywordQuery(){
           console.log('Send Query!');
           query_url = query_api+query;
           
@@ -72,16 +86,25 @@ var vm = new Vue({
           })
         },
 
-        keyWordRecommend(receive){
-          this.items = [];
-          this.items.push(
-            {
-              "channel": "伯恩夜夜秀",
-              "cid": "UCDrswN-SqWh7Kii62h9aXGA",
-              "videos": [test_data["videos"][0]]
-            }
-            )
+        vidQuery(vid){
+          console.log(vid,"|",typeof  vid);
         },
+
+        recommendKeyWordQuery(keyword){
+          console.log(keyword,"|",typeof  keyword);
+        },
+
+        
+        rangeValueQuery(value){
+          console.log(value,"|",typeof  value);
+        },
+
+
+
+
+        //==============================================================//
+        //==============================================================//  
+
         wordcloudWeight(_weight){
           var weight = _weight*100;
           if(weight<30){
@@ -91,34 +114,41 @@ var vm = new Vue({
             return weight;
           }
         },
+        random_choose(target_arr,num_of_return){
+          // use in show keyword (write in html)
+          // use in mounted (below)
+          var res = [];
+          
+          len = target_arr.length
+          
+
+          
+          // Fisher–Yates shuffle algorithm
+          for(;num_of_return>0;num_of_return--){
+              chosenOne = Math.floor(Math.random() * (len)); //select 0~len-1
+              
+              //push to res
+              res.push(target_arr[chosenOne]);
+              //swap to end 
+              temp = target_arr[chosenOne]
+              target_arr[chosenOne] = target_arr[len-1];
+              target_arr[len-1] = temp ;       
+              len-=1;
+            }
+
+          return res ;
+          },
+
+      
+
+
       },
 
 
     mounted: function(){  // 隨機選出n部影片呈現給使用者
-          this.items = [];
-          videos = test_data["videos"]
-          len = videos.length
-          n = 5 //n部影片
-
-          //!!!!!!!!!!!!!!!!!注意!!!!!!!!!!!!!!!!!!!
-          // 舊格式 - 待修改
-          res = { 
-            "channel": "伯恩夜夜秀",
-            "cid": "UCDrswN-SqWh7Kii62h9aXGA",
-            "videos": [] 
-          }
-          // Fisher–Yates shuffle algorithm
-          for(;n>0;n--){
-            chosenOne = Math.floor(Math.random() * (len)); //select 0~len-1
-   
-            //push to res
-            res["videos"].push(videos[chosenOne])
-            //swap to end 
-            videos[chosenOne] = videos[len-1];
           
-            len-=1;
-          }
-
+          res= this.random_choose(this.test_data,2);
+          console.log(res);
 
        
 

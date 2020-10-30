@@ -1,5 +1,5 @@
 # Work log
-### First commit
+### First commit 
 * add comments  
 * add README  
 * add range in main_page.html (need to be adjusted typesetting )  
@@ -19,13 +19,13 @@
 ### Add random cold start 
 * in vue.js mounted function，implement shuffle algorithm to get n random videos
 
-### split json from vue.js (in js/data.js)
+### split json from vue.js (in js/data.js) 
 * As title
 
 ### Generalize keyword recommend 
 * modify button by v-for="(key,vid) in keyword" to generate keyword button
 * NEED to add random function
-* WARNING: old verson json does NOT support this function 
+* ~**WARNING**: old verson json does NOT support this function~ 
 
 ### Fix API error
 * modify sendQuery() function
@@ -37,6 +37,13 @@
 
 ### Add Split Word Cloud
 * Words are vary in Font-size & Font-weight depends on their wordcloud-weight (Proportional)
+
+### Fix keyword recommend format
+* Generalize random function in vue.js method: random_choose()
+* add keyword json data 
+* **WARNING**: some keywords are meaningless for me(littleCube2019) . Need to be checked.
+
+### change query method name in vue.js
 
 # Note
 ### bootstrap
@@ -60,3 +67,7 @@ By controlling "n" in tag (class = "col-md-n")，we can determine width of compo
 And remember to include data.js in html  
 by adding  `<script type="text/javascript" src="js/data.js"></script> `
 
+# Bug Fix Experience 
+
+* Cannot read property '_wrapper' of undefine
+通常是html裡按鈕綁定函數設定不正確(通常是名字錯誤)
