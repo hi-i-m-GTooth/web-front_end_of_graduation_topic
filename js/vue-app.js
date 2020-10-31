@@ -4,9 +4,10 @@ var vm = new Vue({
     delimiters: ["{{{", "}}}"],
     el: '#app',
     data:{
-        items:test_data,  //測試分隔檔案
+        items:data,  //測試分隔檔案
         tmp_items:[],
-        keyword:keyword,
+        keyword:keyword, // 關鍵字推薦中的所有關鍵字形成的list
+        all_vid:vids, //所有影片vid
 
         vid_num: 0,
         query: "",
@@ -146,16 +147,20 @@ var vm = new Vue({
 
 
     mounted: function(){  // 隨機選出n部影片呈現給使用者
-          
-          res= this.random_choose(this.test_data,2);
-          console.log(res);
+          this.tmp_items = {};
 
-       
+          video_IDs = this.random_choose(this.all_vid,5);
+          //console.log(res);
 
-          this.items.push(res);
-          this.tmp_items.push(res);
+          for (var i=0;i<video_IDs.length;i++){
+
+              this.tmp_items[video_IDs[i]] = this.items[video_IDs[i]];
+          }  
+
           
-          console.log("hello world");
+
+          
+          console.log(this.tmp_items);
     },
     
   
