@@ -45,6 +45,11 @@
 
 ### change query method name in vue.js
 
+### modify to fit new format  
+* modify all vue template in html
+* replace some duplicate tag to v-for  
+
+
 # Note
 ### bootstrap
 
