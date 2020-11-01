@@ -52,6 +52,7 @@
 ### Change "wordcloud" into "word sunburst"
 * apply sunburst chart in d3.js
 * add new file: wordcloud.js
+* change mutiplication number of entertainment value (enlarger it)
 * **WARNING** font-size need to be determined. It is currently too small.
 
 
