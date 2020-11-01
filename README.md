@@ -49,6 +49,11 @@
 * modify all vue template in html
 * replace some duplicate tag to v-for  
 
+### Change "wordcloud" into "word sunburst"
+* apply sunburst chart in d3.js
+* add new file: wordcloud.js
+* **WARNING** font-size need to be determined. It is currently too small.
+
 
 # Note
 ### bootstrap
