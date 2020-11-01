@@ -18,6 +18,7 @@
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
         <script src="http://www.youtube.com/player_api"></script>
+        <script src="https://d3js.org/d3.v6.min.js"></script>
 
         <!-- 引入測試data  
             流程 把 json 令一個變數，如test_data
@@ -254,7 +255,7 @@
 
                                                     <div class="col-md-9">
                                                         <div class="progress">
-                                                            <div class="progress-bar bg-danger" role="progressbar" :style="'width:'+info.Discuss.Entertainment_Value*100+'%'" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                                            <div class="progress-bar bg-danger" role="progressbar" :style="'width:'+info.Discuss.Entertainment_Value*1000+'%'" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -321,17 +322,17 @@
                                         </div>
                                         </div>
          
-                                                        <div class="row">
-                                                            <div class="col-md-12">
-        
-                                                                <ul class="nav nav-tabs" :id="'myTab'+vid" role="tablist">
-                                                                    <li class="nav-item" role="presentation">
-                                                                    <a class="nav-link active" :id="'geng-tab'+vid" data-toggle="tab" :href="'#geng'+vid" role="tab" :aria-controls="'geng'+vid" aria-selected="true">梗在這呢</a>
-                                                                    </li>
-                                                                    <li class="nav-item" role="presentation">
-                                                                    <a class="nav-link" :id="'cloud-tab'+vid" data-toggle="tab" :href="'#cloud'+vid" role="tab" :aria-controls="'cloud'+vid" aria-selected="false">大家都說</a>
-                                                                    </li>
-                                                                </ul>
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <ul class="nav nav-tabs" :id="'myTab'+vid" role="tablist">
+                            <li class="nav-item" role="presentation">
+                            <a class="nav-link active" :id="'geng-tab'+vid" data-toggle="tab" :href="'#geng'+vid" role="tab" :aria-controls="'geng'+vid" aria-selected="true">梗在這呢</a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                            <a class="nav-link" :id="'cloud-tab'+vid" data-toggle="tab" :href="'#cloud'+vid" role="tab" :aria-controls="'cloud'+vid" aria-selected="false">大家都說</a>
+                            </li>
+                        </ul>
                                                         
                                                             
         
@@ -352,41 +353,44 @@
                                    </div>
                                 </div>
                                  
-                                 <div class="tab-pane fade" :id="'cloud'+vid" role="tabpanel" :aria-labelledby="'cloud-tab'+vid">
-                                <div class="modal-body">
-                        <!-- relative path -->
-                                            <svg id="tagi" class="img-fluid" alt="Responsive image" x="0px" y="0px" width="100%" height="324px" viewBox="0 0 920 324">
+                                <div class="tab-pane fade" :id="'cloud'+vid" role="tabpanel" :aria-labelledby="'cloud-tab'+vid">
+                                    <div class="wordcloud modal-body" :vid="vid">
+                                        <!-- relative path -->
+                                        <!--
+                                        <svg id="tagi" class="img-fluid" alt="Responsive image" x="0px" y="0px" width="100%" height="324px" viewBox="0 0 920 324">
                                             <div v-for="word in info.Word_Cloud">
 
-                                            <text v-for="(word_value,word_key) in word" transform="matrix(1 0 0 1 188.187 130.3555)" :style="'font-size: '+wordcloudWeight(word_value)+';font-weight:'+ wordcloudWeight(word_value)*17 +';' " class="st5 st17 st22" @click="consoleTest('123');">{{{word_key}}}</text>
+                                            
                                             </div>         
-                                                                            </svg>
-                                        </div>                            
-                                     </div>
-                        </div>
-                                         </div>                        
-                                    </div>
-                                                        
-                                                  
-        
-                                                        <a :href="'https://www.youtube.com/channel/'+info.cid" class="btn btn-primary">Go to Channel</a>
-                                                   
-                                                </div>
-                                                
-                                                </div>
-
-                                           
-                                        </div>   
-                                                        
-                                    </div>
-                                       
-                               
+                                        </svg>
+                                        -->
+                                        
+                                    </div>                            
                                 </div>
-                       
-                            </div>
-
-                            
                         </div>
+                    </div>                        
+                </div>
+                                                
+                                            
+
+                                                <a :href="'https://www.youtube.com/channel/'+info.cid" class="btn btn-primary">Go to Channel</a>
+                                            
+                                        </div>
+                                        
+                                        </div>
+
+                                    
+                                </div>   
+                                                
+                            </div>
+                                
+                        
+                        </div>
+                
+                    </div>
+
+                    
+                </div>
 
                             
                     </div>
@@ -446,6 +450,7 @@
 
         <!-- relative path -->
         <!-- relative path -->
+        <script type="text/javascript" src="./js/wordcloud.js"></script>
         <script type="text/javascript" src="./js/vue-app.js"></script>
         <script type="text/javascript" src="./js/util.js"></script>
     </body>

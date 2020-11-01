@@ -61,7 +61,6 @@ var vm = new Vue({
           //綁定於 button class="col-md-1 btn btn-outline-dark "  
           //按下會更動網頁mode 
           this.mode = (this.mode+1)%this.allMode ;
-         
         },
 
         //==============================================================//
@@ -106,6 +105,9 @@ var vm = new Vue({
         //==============================================================//
         //==============================================================//  
 
+        wordcloudChart(data){
+          return chart(data);
+        },
         wordcloudWeight(_weight){
           var weight = _weight*100;
           if(weight<30){
@@ -149,20 +151,28 @@ var vm = new Vue({
     mounted: function(){  // 隨機選出n部影片呈現給使用者
           this.tmp_items = {};
 
-          video_IDs = this.random_choose(this.all_vid,5);
+          //video_IDs = this.random_choose(this.all_vid,5);
+          video_IDs = ["00w3Yf9gJlU","075Y1XWUn30","09X9_Hesn5o","0A3Iilngu_g","0B1DyDd6SCg"]
           //console.log(res);
 
           for (var i=0;i<video_IDs.length;i++){
-
               this.tmp_items[video_IDs[i]] = this.items[video_IDs[i]];
           }  
-
-          
-
           
           console.log(this.tmp_items);
     },
-    
-  
+
+    updated: function(){
+        // 製作文字Sunburst圖
+        // WARNING!! data.js資料格式不對！
+        var global_this = this;
+        d3.select(document.body)
+          .selectAll(".wordcloud.modal-body")
+          .each(function(d,i){
+            var vid = d3.select(this).attr("vid");
+            d3.select(this).node()
+              .appendChild(chart(global_this.items[vid]["Word_Cloud"]))
+          })
+    },
 
 });
