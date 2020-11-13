@@ -1,7 +1,7 @@
 var vids_url = "../channeled_vids.json";
 
 var vm = new Vue({
-    delimiters: ["{{{", "}}}"],
+    delimiters: ["[[", "]]"],
     el: '#app',
     data:{
         items:data,  //測試分隔檔案
@@ -11,7 +11,9 @@ var vm = new Vue({
 
         vid_num: 0,
         query: "",
-        query_api: "http://127.0.01:8000/test?queryname=",
+        keyword_api: "http://127.0.0.1:8000/sendall?queryname=",
+        popularity_api: "http://127.0.0.1:8000/sendpop?popularity=",
+        key_api: "http://127.0.0.1:8000/sendkey?keyword=",
 
         mode: 0,
         // mode : 當前mode
@@ -22,6 +24,7 @@ var vm = new Vue({
         allMode: 3,  
         //allMode: 所有mode數量 
         rangeOutput: "拉桿",
+        rangeValue: 0,
         //讓使用者知道當前拉桿值
     },
     methods: {
@@ -55,6 +58,7 @@ var vm = new Vue({
           else  if (val == 4){
             this.rangeOutput = "娛樂";
           }
+          this.rangeValue = val;
         },
 
         changeMode(){  
@@ -73,7 +77,31 @@ var vm = new Vue({
         //==============================================================//
         sendKeywordQuery(){
           console.log('Send Query!');
-          query_url = query_api+query;
+          query_url = this.keyword_api+this.query;
+          
+          fetch(query_url, {
+            method: 'GET',
+          })
+          .then(res => {
+            return res.json();
+          })
+          .then(video_info_obj => {
+            //console.log(myJson);
+            var keys = Object.keys(video_info_obj);
+            vid_list = global_this.random_choose(keys,1);
+
+            global_this.tmp_items = {} //clean 
+            for (var i=0;i<vid_list.length;i++){
+                global_this.tmp_items[vid_list[i]] =video_info_obj[vid_list[i]];
+            }
+
+          })
+        },
+
+        vidQuery(vid){ //return data 
+          console.log(vid,"|",typeof  vid);
+          console.log('Send Query!');
+          query_url = this.keyword_api+this.query;
           
           fetch(query_url, {
             method: 'GET',
@@ -86,17 +114,58 @@ var vm = new Vue({
           })
         },
 
-        vidQuery(vid){
-          console.log(vid,"|",typeof  vid);
-        },
-
-        recommendKeyWordQuery(keyword){
+        recommendKeyWordQuery(keyword){ // return vid_list
+          var global_this = this;
           console.log(keyword,"|",typeof  keyword);
+          console.log('Send Query!');
+          query_url = this.key_api+keyword;
+          
+          fetch(query_url, {
+            method: 'GET',
+          })
+          .then(res => {
+            return res.json();
+          })
+          .then(video_info_obj => {
+            //console.log(myJson);
+            var keys = Object.keys(video_info_obj);
+            vid_list = global_this.random_choose(keys,1);
+
+            global_this.tmp_items = {} //clean 
+            for (var i=0;i<vid_list.length;i++){
+                global_this.tmp_items[vid_list[i]] =video_info_obj[vid_list[i]];
+            }
+
+          })
+           
+           //temp_list = {};
+          
         },
 
-        
-        rangeValueQuery(value){
+         
+        rangeValueQuery(value){  //return vid_list
+          var global_this = this; 
           console.log(value,"|",typeof  value);
+          console.log('Send Query!');
+          query_url = this.popularity_api+value;
+          
+          fetch(query_url, {
+            method: 'GET',
+          })
+          .then(res => {
+            return res.json();
+          })
+          .then(video_info_obj => {
+            var keys = Object.keys(video_info_obj);
+            vid_list = global_this.random_choose(keys,5);
+            
+            global_this.tmp_items = {} //clean 
+            for (var i=0;i<vid_list.length;i++){
+                global_this.tmp_items[vid_list[i]] = video_info_obj[vid_list[i]];
+            }
+
+
+          })
         },
 
 
