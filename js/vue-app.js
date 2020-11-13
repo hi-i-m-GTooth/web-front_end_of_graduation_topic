@@ -221,7 +221,7 @@ var vm = new Vue({
           this.tmp_items = {};
 
           //video_IDs = this.random_choose(this.all_vid,5);
-          video_IDs = ["00w3Yf9gJlU","075Y1XWUn30","09X9_Hesn5o","0A3Iilngu_g","0B1DyDd6SCg"]
+          video_IDs = ["F7Jw5yn2-Rw","00w3Yf9gJlU","075Y1XWUn30","09X9_Hesn5o","0A3Iilngu_g","0B1DyDd6SCg"]
           //console.log(res);
 
           for (var i=0;i<video_IDs.length;i++){

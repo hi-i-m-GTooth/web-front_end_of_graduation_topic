@@ -299,7 +299,7 @@
                                                         <div class="row video-data">
                                                             <div class="col-md-12">
                                                                 <div class="embed-responsive embed-responsive-21by9">
-                                                                    <iframe :onload="'player'+vid+'=new YT.Player(this)'" class="embed-responsive-item vid" width="100%" object-fit="cover" :src="'https://www.youtube.com/embed/'+vid+'?enablejsapi=1'" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                                                    <iframe :onload="'player'+vid.replace('-','')+'=new YT.Player(this)'" class="embed-responsive-item vid" width="100%" object-fit="cover" :src="'https://www.youtube.com/embed/'+vid+'?enablejsapi=1'" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                                                 </div>
                                                            
                                                                      
@@ -346,7 +346,7 @@
                                         
                                         <buttom  v-for="(geng_value,geng_name) in geng" 
                                         v-bind:key="geng_value.time"
-                                        type="button" class="list-group-item  list-group-item-action text-center" :onclick="'player'+vid+'.seekTo('+geng_value.time+'-3, true)'">[[geng_name]]</buttom>
+                                        type="button" class="list-group-item  list-group-item-action text-center" :onclick="'player'+vid.replace('-','')+'.seekTo('+geng_value.time+'-3, true)'">[[geng_name]]</buttom>
                                         
                                     </ul>
                                     </div>
