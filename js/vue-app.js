@@ -42,20 +42,20 @@ var vm = new Vue({
      
         //綁定於mode=2 的拉桿，用於呈現數值變化
         updateRangeValue(event){
-          let val = event.target.value;  // 回傳event這個物件，要的value在target裡
-          if (val == 0){
+          let val = event.target.value+1;  // 回傳event這個物件，要的value在target裡
+          if (val == 1){
             this.rangeOutput = "嚴肅";
           }
-          else if (val == 1){
+          else if (val == 2){
             this.rangeOutput = "稍微嚴肅";
           }
-          else if (val == 2){
+          else if (val == 3){
             this.rangeOutput = "中立";
           }
-          else  if (val == 3){
+          else  if (val == 4){
             this.rangeOutput = "稍微娛樂";
           }
-          else  if (val == 4){
+          else  if (val == 5){
             this.rangeOutput = "娛樂";
           }
           this.rangeValue = val;
