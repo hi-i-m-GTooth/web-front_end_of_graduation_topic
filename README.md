@@ -55,6 +55,11 @@
 * change mutiplication number of entertainment value (enlarger it)
 * **WARNING** font-size need to be determined. It is currently too small.
 
+### Test for radar chart 
+* add chart.js in js 
+* add "屬性圖" in html
+* include Chart.min.js
+* **WARNING** Only for demo this time
 
 # Note
 ### bootstrap
@@ -80,5 +85,8 @@ by adding  `<script type="text/javascript" src="js/data.js"></script> `
 
 # Bug Fix Experience 
 
-* Cannot read property '_wrapper' of undefine
+* Cannot read property '\_wrapper' of undefine
 通常是html裡按鈕綁定函數設定不正確(通常是名字錯誤)
+
+* javaScript引入檔有些要放在html最後面 如vue.js chart.js這些自訂的js檔  
+有些要放在最前面比如vue、jquery這些lib
