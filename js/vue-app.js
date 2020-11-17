@@ -42,20 +42,20 @@ var vm = new Vue({
      
         //綁定於mode=2 的拉桿，用於呈現數值變化
         updateRangeValue(event){
-          let val = event.target.value;  // 回傳event這個物件，要的value在target裡
-          if (val == 0){
+          let val = event.target.value+1;  // 回傳event這個物件，要的value在target裡
+          if (val == 1){
             this.rangeOutput = "嚴肅";
           }
-          else if (val == 1){
+          else if (val == 2){
             this.rangeOutput = "稍微嚴肅";
           }
-          else if (val == 2){
+          else if (val == 3){
             this.rangeOutput = "中立";
           }
-          else  if (val == 3){
+          else  if (val == 4){
             this.rangeOutput = "稍微娛樂";
           }
-          else  if (val == 4){
+          else  if (val == 5){
             this.rangeOutput = "娛樂";
           }
           this.rangeValue = val;
@@ -221,8 +221,12 @@ var vm = new Vue({
           this.tmp_items = {};
 
           //video_IDs = this.random_choose(this.all_vid,5);
+
+          video_IDs = ["00w3Yf9gJlU","075Y1XWUn30","09X9_Hesn5o","0A3Iilngu_g","0B1DyDd6SCg"]
+=======
           //video_IDs = ["F7Jw5yn2-Rw","00w3Yf9gJlU","075Y1XWUn30","09X9_Hesn5o","0A3Iilngu_g","0B1DyDd6SCg"]
           //video_IDs = ["00w3Yf9gJlU"]
+
           //console.log(res);
 
           for (var i=0;i<video_IDs.length;i++){
