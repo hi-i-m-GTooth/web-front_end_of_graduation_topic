@@ -55,11 +55,6 @@
 * change mutiplication number of entertainment value (enlarger it)
 * **WARNING** font-size need to be determined. It is currently too small.
 
-### Change "wordcloud" into "bubble chart"
-* each geng and comments belong to it correspond to one unique color
-* combine geng and chart into one page
-* 
-
 # Note
 ### bootstrap
 
