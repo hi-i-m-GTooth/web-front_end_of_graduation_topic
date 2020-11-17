@@ -55,6 +55,12 @@
 * change mutiplication number of entertainment value (enlarger it)
 * **WARNING** font-size need to be determined. It is currently too small.
 
+### Change "wordcloud" into "bubble chart"
+* each geng and comments belong to it correspond to one unique color
+* combine geng and chart into one page
+* add format file "sunburst.json" for recording
+* modify the DOMs' classes in tab-pane
+
 ### Test for radar chart 
 * add chart.js in js 
 * add "屬性圖" in html
