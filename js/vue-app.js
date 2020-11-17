@@ -221,7 +221,12 @@ var vm = new Vue({
           this.tmp_items = {};
 
           //video_IDs = this.random_choose(this.all_vid,5);
+
           video_IDs = ["00w3Yf9gJlU","075Y1XWUn30","09X9_Hesn5o","0A3Iilngu_g","0B1DyDd6SCg"]
+=======
+          //video_IDs = ["F7Jw5yn2-Rw","00w3Yf9gJlU","075Y1XWUn30","09X9_Hesn5o","0A3Iilngu_g","0B1DyDd6SCg"]
+          //video_IDs = ["00w3Yf9gJlU"]
+
           //console.log(res);
 
           for (var i=0;i<video_IDs.length;i++){
@@ -235,12 +240,16 @@ var vm = new Vue({
         // 製作文字Sunburst圖
         // WARNING!! data.js資料格式不對！
         var global_this = this;
+
         d3.select(document.body)
-          .selectAll(".wordcloud.modal-body")
+          .selectAll(".wordcloud")
           .each(function(d,i){
-            var vid = d3.select(this).attr("vid");
-            d3.select(this).node()
-              .appendChild(chart(global_this.items[vid]["Word_Cloud"]))
+            var btns_this = d3.select(this).select(".btns");
+            var vid = d3.select(this).select(".chart").attr("vid");
+            if(global_this.items[vid]["word_cloud"]!=undefined){
+              d3.select(this).select(".chart").node()
+                .appendChild(chart(global_this.items[vid]["word_cloud"], btns_this))
+            }
           })
     },
 

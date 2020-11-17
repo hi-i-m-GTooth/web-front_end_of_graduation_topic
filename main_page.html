@@ -40,10 +40,6 @@
     <body>
         <div id="app">
 
-            <global>
-
-            </global>
-
             <header>
 
                 <div class='container'>
@@ -330,9 +326,11 @@
                     <div class="col-md-12">
 
                         <ul class="nav nav-tabs" :id="'myTab'+vid" role="tablist">
+                            <!--
                             <li class="nav-item" role="presentation">
                             <a class="nav-link active" :id="'geng-tab'+vid" data-toggle="tab" :href="'#geng'+vid" role="tab" :aria-controls="'geng'+vid" aria-selected="true">梗在這呢</a>
                             </li>
+                            -->
                             <li class="nav-item" role="presentation">
                             <a class="nav-link" :id="'cloud-tab'+vid" data-toggle="tab" :href="'#cloud'+vid" role="tab" :aria-controls="'cloud'+vid" aria-selected="false">大家都說</a>
                             </li>
@@ -346,33 +344,54 @@
         
                         <div class="tab-content" :id="'myTabContent'+vid">
 
+                            <!--
                                 <div class="tab-pane fade show active" :id="'geng'+vid" role="tabpanel" :aria-labelledby="'geng-tab'+vid">
                                     <div class="modal-body">
-                                    <div v-for="geng in info.Geng" v-bind:key="geng.name">
-                                    
-                                    <ul class="list-group list-group-horizontal-sm">
+                                        <div v-for="geng in info.Geng" v-bind:key="geng.name">
                                         
-                                        <buttom  v-for="(geng_value,geng_name) in geng" 
-                                        v-bind:key="geng_value.time"
-                                        type="button" class="list-group-item  list-group-item-action text-center" :onclick="'player'+vid.replace('-','')+'.seekTo('+geng_value.time+'-3, true)'">[[geng_name]]</buttom>
-                                        
-                                    </ul>
-                                    </div>
+                                        <ul class="list-group list-group-horizontal-sm">
+                                            
+                                            <button  style="margin: 8 0;" v-for="(geng_value,geng_name) in geng" 
+                                            v-bind:key="geng_value.time"
+                                            type="button" class="list-group-item  list-group-item-action text-center" :onclick="'player'+vid.replace('-','')+'.seekTo('+geng_value.time+'-3, true)'">[[geng_name]]</button>
+                                            
+                                        </ul>
+                                        </div>
                                    </div>
                                 </div>
-                                 
-                                <div class="tab-pane fade" :id="'cloud'+vid" role="tabpanel" :aria-labelledby="'cloud-tab'+vid">
-                                    <div class="wordcloud modal-body" :vid="vid">
-                                        <!-- relative path -->
-                                        <!--
-                                        <svg id="tagi" class="img-fluid" alt="Responsive image" x="0px" y="0px" width="100%" height="324px" viewBox="0 0 920 324">
-                                            <div v-for="word in info.Word_Cloud">
+                            -->
+                                <div class="tab-pane fade show active" :id="'cloud'+vid" role="tabpanel" :aria-labelledby="'cloud-tab'+vid">
+                                    <div class="container">
 
-                                            
-                                            </div>         
-                                        </svg>
-                                        -->
-                                        
+                                        <div class="wordcloud row">
+                                            <div class="btns modal-body col-md-2">
+                                                <div class="align-self-center">
+                                                
+                                                    <ul v-for="geng in info.Geng" v-bind:key="geng.name" class="list-group list-group-horizontal-sm">
+                                                        
+                                                        <button v-for="(geng_value,geng_name) in geng" 
+                                                        v-bind:key="geng_value.time"
+                                                        type="button" class="list-group-item  list-group-item-action text-center" :onclick="'player'+vid.replace('-','')+'.seekTo('+geng_value.time+'-3, true)'">[[geng_name]]</button>
+                                                        
+                                                    </ul>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="chart modal-body col-md-10" :vid="vid">
+                                                <!-- relative path -->
+                                                <!--
+                                                <svg id="tagi" class="img-fluid" alt="Responsive image" x="0px" y="0px" width="100%" height="324px" viewBox="0 0 920 324">
+                                                    <div v-for="word in info.Word_Cloud">
+
+                                                    
+                                                    </div>         
+                                                </svg>
+                                                -->
+                                                
+                                            </div>
+                                        </div>
+
                                     </div>                            
                                 </div>
 
@@ -478,6 +497,7 @@
 
         <!-- relative path -->
         <!-- relative path -->
+        <script type="module" src="js/uid.js"></script>
         <script type="text/javascript" src="./js/wordcloud.js"></script>
         <script type="text/javascript" src="./js/vue-app.js"></script>
         <script type="text/javascript" src="./js/util.js"></script>
