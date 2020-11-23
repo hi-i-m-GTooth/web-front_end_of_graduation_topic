@@ -141,6 +141,11 @@
             <section id='demo'>
 
                     <div class="container">
+                        <div id="loading-page" class="ld-modal">
+                            <div class="spinner-border text-danger" role="status">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                        </div>
 
                         <div class="row">
 
@@ -217,7 +222,7 @@
                         <!--呈現結果部分-->
                         <div id="demo-cards" class="container">
                             <div class=row>
-                            <div class="proto col-md-12" v-for="(info, vid) in tmp_items" :key='info.cid '>  <!--vid 與 梗、聲量的內容檔-->
+                            <div class="proto col-md-12" v-for="(info, vid) in tmp_items" :key="info.cid">  <!--vid 與 梗、聲量的內容檔-->
                                 <!-- 預覽部分 -->
                                 <!-- 標題、觀看次數、讚數-->
 
@@ -298,7 +303,7 @@
         
                                                         <div class="row video-data">
                                                             <div class="col-md-12">
-                                                                <div class="embed-responsive embed-responsive-21by9">
+                                                                <div :id="'youtube'+vid" class="embed-responsive embed-responsive-21by9">
                                                                     <iframe :onload="'player'+vid.replace('-','')+'=new YT.Player(this)'" class="embed-responsive-item vid" width="100%" object-fit="cover" :src="'https://www.youtube.com/embed/'+vid+'?enablejsapi=1'" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                                                 </div>
                                                            
@@ -344,22 +349,6 @@
         
                         <div class="tab-content" :id="'myTabContent'+vid">
 
-                            <!--
-                                <div class="tab-pane fade show active" :id="'geng'+vid" role="tabpanel" :aria-labelledby="'geng-tab'+vid">
-                                    <div class="modal-body">
-                                        <div v-for="geng in info.Geng" v-bind:key="geng.name">
-                                        
-                                        <ul class="list-group list-group-horizontal-sm">
-                                            
-                                            <button  style="margin: 8 0;" v-for="(geng_value,geng_name) in geng" 
-                                            v-bind:key="geng_value.time"
-                                            type="button" class="list-group-item  list-group-item-action text-center" :onclick="'player'+vid.replace('-','')+'.seekTo('+geng_value.time+'-3, true)'">[[geng_name]]</button>
-                                            
-                                        </ul>
-                                        </div>
-                                   </div>
-                                </div>
-                            -->
                                 <div class="tab-pane fade show active" :id="'cloud'+vid" role="tabpanel" :aria-labelledby="'cloud-tab'+vid">
                                     <div class="container">
 
@@ -371,23 +360,16 @@
                                                         
                                                         <button v-for="(geng_value,geng_name) in geng" 
                                                         v-bind:key="geng_value.time"
-                                                        type="button" class="list-group-item  list-group-item-action text-center" :onclick="'player'+vid.replace('-','')+'.seekTo('+geng_value.time+'-3, true)'">[[geng_name]]</button>
+                                                        type="button" class="list-group-item  list-group-item-action text-center" :onclick=`player${vid.replace('-','')}.seekTo(${geng_value.time-3},true);location.href='#youtube${vid}'`>[[geng_name]]</button>
                                                         
                                                     </ul>
 
                                                 </div>
                                             </div>
 
-                                            <div class="chart modal-body col-md-10" :vid="vid">
-                                                <!-- relative path -->
-                                                <!--
-                                                <svg id="tagi" class="img-fluid" alt="Responsive image" x="0px" y="0px" width="100%" height="324px" viewBox="0 0 920 324">
-                                                    <div v-for="word in info.Word_Cloud">
+                                            <div class="chart modal-body col-md-10" :vid=`${vid}`>
 
-                                                    
-                                                    </div>         
-                                                </svg>
-                                                -->
+                                                <!-- bubble chart -->
                                                 
                                             </div>
                                         </div>
@@ -399,17 +381,7 @@
                                     <div class="radar modal-body" :vid="vid">
                                         <canvas id="radarChart"></canvas>
                                 
-                                            
-                                      
-                                   
-                                        <!--
-                                        <svg id="tagi" class="img-fluid" alt="Responsive image" x="0px" y="0px" width="100%" height="324px" viewBox="0 0 920 324">
-                                            <div v-for="word in info.Word_Cloud">
-
-                                            
-                                            </div>         
-                                        </svg>
-                                        -->
+                                            <!-- radar chart -->
                                         
                                     </div>                            
                                 </div>
@@ -439,7 +411,21 @@
                     
                 </div>
 
-                            
+                        
+                <nav aria-label="Page navigation" style="margin-top: 10;">
+                    <ul class="pagination justify-content-center pagination-lg">
+                      <li class="page-item">
+                        <a class="page-link" href="#demo" tabindex="-1" @click="change_page(-1);" style="margin: 0 20;">Prev</a>
+                      </li>
+                      <li class="page-item" v-for="(page, vid) in cur_pages" :key="page">
+                          <a class="page-link" :id="'page'+page" href="#demo" @click="set_page(page)">[[page]]</a>
+                      </li>
+                      <li class="page-item">
+                        <a class="page-link" href="#demo" @click="change_page(1);" style="margin: 0 20;">Next</a>
+                      </li>
+                    </ul>
+                </nav>
+
                     </div>
 
 

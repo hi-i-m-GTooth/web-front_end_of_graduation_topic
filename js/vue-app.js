@@ -5,9 +5,17 @@ var vm = new Vue({
     el: '#app',
     data:{
         items:data,  //測試分隔檔案
-        tmp_items:[],
+        tmp_keys: [],
+        result_items: [],
+        tmp_items: {}, // 處理後的結果影片
         keyword:keyword, // 關鍵字推薦中的所有關鍵字形成的list
         all_vid:vids, //所有影片vid
+        
+        // 分頁用
+        cur_page:1,
+        cur_pages:[1,2,3,4,5],
+        max_page:3,
+        pagination_num:5,
 
         vid_num: 0,
         query: "",
@@ -34,6 +42,15 @@ var vm = new Vue({
         },
         returnTmp(){
           this.items = this.tmp_items;
+        },
+
+        startLoading(){
+          var loading_page = document.getElementById("loading-page");
+          loading_page.classList.add("loading");
+        },
+        endLoading(){
+          var loading_page = document.getElementById("loading-page");
+          loading_page.className = loading_page.className.replace(/\bloading\b/g, "");
         },
 
                           /** interaction component **/
@@ -65,6 +82,44 @@ var vm = new Vue({
           //綁定於 button class="col-md-1 btn btn-outline-dark "  
           //按下會更動網頁mode 
           this.mode = (this.mode+1)%this.allMode ;
+        },
+
+        change_page(_num){
+          var num = parseInt(_num);
+          if(num<0 && this.cur_page>1){
+            this.set_page(this.cur_page+num);
+          }
+          else if(num>0 && this.cur_page<this.max_page){
+            this.set_page(this.cur_page+num);
+          }
+          //console.log(this.cur_page);
+        },
+        
+        set_page(_num){
+          var num = parseInt(_num);
+          if(num>0 && num<=this.max_page){
+            var element = document.getElementById("page"+this.cur_page);
+            element.className = element.className.replace(/\bactive2\b/g, "");
+            this.cur_page = num;
+            var element = document.getElementById("page"+this.cur_page);
+            element.classList.add("active2");
+            this.follow_cur_page();
+          }
+        },
+
+        follow_cur_page(){
+          if(this.max_page<this.pagination_num){
+            this.cur_pages = Array.from(Array(this.max_page), (x, index) => index+1);
+          }
+          else if(this.cur_page<(this.pagination_num+1)/2){
+            this.cur_pages = Array.from(Array(this.pagination_num), (x, index) => index+1);
+          }
+          else if(this.cur_page>this.max_page-(this.pagination_num+1)/2){
+            this.cur_pages = Array.from(Array(this.pagination_num), (x, index) => index+this.max_page-this.pagination_num+1);
+          }
+          else{
+            this.cur_pages = Array.from(Array(this.pagination_num), (x, index) => index+this.cur_page-(this.pagination_num+1)/2+1);
+          }
         },
 
         //==============================================================//
@@ -168,15 +223,13 @@ var vm = new Vue({
           })
         },
 
+        
 
 
 
         //==============================================================//
-        //==============================================================//  
+        //==============================================================// 
 
-        wordcloudChart(data){
-          return chart(data);
-        },
         wordcloudWeight(_weight){
           var weight = _weight*100;
           if(weight<30){
@@ -219,24 +272,35 @@ var vm = new Vue({
 
     mounted: function(){  // 隨機選出n部影片呈現給使用者
           this.tmp_items = {};
+          //this.tmp_items = [];
 
           //video_IDs = this.random_choose(this.all_vid,5);
 
-          video_IDs = ["00w3Yf9gJlU","075Y1XWUn30","09X9_Hesn5o","0A3Iilngu_g","0B1DyDd6SCg"]
-=======
-          //video_IDs = ["F7Jw5yn2-Rw","00w3Yf9gJlU","075Y1XWUn30","09X9_Hesn5o","0A3Iilngu_g","0B1DyDd6SCg"]
+          //video_IDs = ["00w3Yf9gJlU","075Y1XWUn30","09X9_Hesn5o","0A3Iilngu_g","0B1DyDd6SCg"]
+          video_IDs = ["F7Jw5yn2-Rw","00w3Yf9gJlU","075Y1XWUn30","09X9_Hesn5o","0A3Iilngu_g","0B1DyDd6SCg"]
           //video_IDs = ["00w3Yf9gJlU"]
 
           //console.log(res);
 
           for (var i=0;i<video_IDs.length;i++){
               this.tmp_items[video_IDs[i]] = this.items[video_IDs[i]];
-          }  
-          
+              //this.tmp_items.push(this.items[video_IDs[i]]);
+          }
+
+          this.max_page = (Object.keys(this.tmp_items).length-1)/this.pagination_num << 0 + 1;
+          this.set_page(1);
+
           console.log(this.tmp_items);
     },
 
     updated: function(){
+        this.startLoading();
+
+        // 初始最大頁面數
+        this.max_page = (Object.keys(this.tmp_items).length-1)/this.pagination_num << 0 + 1;
+        //this.set_page(this.cur_page);
+        //console.log(this.max_page);
+
         // 製作文字Sunburst圖
         // WARNING!! data.js資料格式不對！
         var global_this = this;
@@ -251,6 +315,8 @@ var vm = new Vue({
                 .appendChild(chart(global_this.items[vid]["word_cloud"], btns_this))
             }
           })
+          
+        this.endLoading();
     },
 
 });

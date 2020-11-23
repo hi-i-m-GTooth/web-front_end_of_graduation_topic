@@ -25,7 +25,7 @@ p,a,input,textarea,span,ul,li{
 }
 
 .btn{
-    background-color: rgba(255, 0, 0, 0.829);
+    background-color: rgba(250, 68, 68, 0.973);
     color: white;
     padding: 5 8;
     margin: 5px;
@@ -135,6 +135,30 @@ header nav li{
 }
 /*-----------------------------------------------------------------*/
 
+#demo .loading{
+    overflow: hidden;
+}
+
+#demo .ld-modal.loading{
+    display: block;
+}
+
+#demo .ld-modal{
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    color: black;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.89);
+}
+
+#demo .ld-modal .spinner-border{
+    margin-top: 25%;
+}
 
 #demo .badge{
     background-color: red;
@@ -245,6 +269,20 @@ header nav li{
     width: 50%;
     /*border: 3px solid rgba(243, 9, 9, 0.733);*/
     padding: 10px;
+}
+
+#demo .pagination .page-item{
+    margin: 0 5;
+}
+
+#demo .pagination .page-link{
+    background-color: rgba(250, 68, 68, 0.973);
+    color: white;
+}
+
+#demo .pagination .page-link.active2{
+    background-color: rgb(0, 0, 0.829);
+    color: white;
 }
 
 /*------------------------- Footer Section ---------------------------*/
