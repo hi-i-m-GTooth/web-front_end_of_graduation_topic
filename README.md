@@ -67,9 +67,9 @@
 * include Chart.min.js
 * **WARNING** Only for demo this time
 
-### Temporary Pagination and Sort Mode Choosing
-* add Pagination (**Videos can't change yet**)
-* add Sort Mode Choosing (**Videos can't change yet**)
+### Pagination and Sort Mode Choosing
+* add Pagination (**temporarily only in draft html**)
+* add Sort Mode Choosing (**temporarily only in draft html**)
 * click geng will automatically roll to the video part
 
 # Note
