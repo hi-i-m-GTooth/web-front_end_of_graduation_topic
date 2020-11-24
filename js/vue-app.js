@@ -10,6 +10,9 @@ var vm = new Vue({
         tmp_items: {}, // 處理後的結果影片
         keyword:keyword, // 關鍵字推薦中的所有關鍵字形成的list
         all_vid:vids, //所有影片vid
+
+        // 排序
+        sort_mode: "綜合分數",
         
         // 分頁用
         cur_page:1,
@@ -57,6 +60,11 @@ var vm = new Vue({
         //==============================================================//
         //==============================================================//
      
+        changeSortMode(_mode){
+          this.sort_mode = _mode;
+          console.log(this.sort_mode);
+        },
+
         //綁定於mode=2 的拉桿，用於呈現數值變化
         updateRangeValue(event){
           let val = event.target.value+1;  // 回傳event這個物件，要的value在target裡

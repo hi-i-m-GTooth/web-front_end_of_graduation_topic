@@ -141,6 +141,7 @@
             <section id='demo'>
 
                     <div class="container">
+
                         <div id="loading-page" class="ld-modal">
                             <div class="spinner-border text-danger" role="status">
                                 <span class="sr-only">Loading...</span>
@@ -153,8 +154,23 @@
                                 <h2 class="lead"><span class="badge badge-primary" style="padding: 10;">Youtube</span> 影片</h2>
                             </div>
 
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  依[[sort_mode]]排序
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                  <button class="dropdown-item" type="button" @click="changeSortMode('綜合分數');">依綜合分數排序</button>
+                                  <button class="dropdown-item" type="button" @click="changeSortMode('觀看次數');">依觀看次數排序</button>
+                                  <button class="dropdown-item" type="button" @click="changeSortMode('按讚數量');">依按讚數量排序</button>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
                              <!--以下是mode==0 ，關鍵字推薦模式-->
                             <div class="container tool-bar">
+
                                 <div v-if="mode==0" class="row justify-content-center">
                                     
                                     <button class="col-md-1 btn btn-change-mode " @click="changeMode">
@@ -173,6 +189,7 @@
                                          
                         
                                     </div>
+
                                 </div>
                                 <!--以下是mode==1 ，搜尋模式-->
                        
