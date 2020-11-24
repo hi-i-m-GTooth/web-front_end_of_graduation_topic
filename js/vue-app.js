@@ -7,7 +7,7 @@ var vm = new Vue({
         items:data,  //測試分隔檔案
         tmp_keys: [],
         result_items: [],
-        tmp_items: {}, // 處理後的結果影片
+        tmp_items: [], // 處理後的結果影片
         keyword:keyword, // 關鍵字推薦中的所有關鍵字形成的list
         all_vid:vids, //所有影片vid
 
@@ -63,6 +63,22 @@ var vm = new Vue({
         changeSortMode(_mode){
           this.sort_mode = _mode;
           console.log(this.sort_mode);
+          if(_mode=="綜合分數"){
+            this.result_items.sort(function(first, second){
+              return second.Discuss.Entertainment_Value - first.Discuss.Entertainment_Value;
+            })
+          }
+          else if(_mode=="觀看次數"){
+            this.result_items.sort(function(first, second){
+              return second.Info.viewCount - first.Info.viewCount;
+            })
+          }
+          else if(_mode=="按讚數量"){
+            this.result_items.sort(function(first, second){
+              return second.Info.likeCount - first.Info.likeCount;
+            })
+          }
+          this.set_page(this.cur_page);
         },
 
         //綁定於mode=2 的拉桿，用於呈現數值變化
@@ -104,6 +120,7 @@ var vm = new Vue({
         },
         
         set_page(_num){
+          console.log(this.sort_mode);
           var num = parseInt(_num);
           if(num>0 && num<=this.max_page){
             var element = document.getElementById("page"+this.cur_page);
@@ -111,6 +128,7 @@ var vm = new Vue({
             this.cur_page = num;
             var element = document.getElementById("page"+this.cur_page);
             element.classList.add("active2");
+            this.tmp_items = this.result_items.slice((this.cur_page-1)*this.pagination_num, (this.cur_page-1)*this.pagination_num+4+1);
             this.follow_cur_page();
           }
         },
@@ -279,8 +297,8 @@ var vm = new Vue({
 
 
     mounted: function(){  // 隨機選出n部影片呈現給使用者
-          this.tmp_items = {};
-          //this.tmp_items = [];
+          //this.tmp_items = {};
+          this.tmp_items = [];
 
           //video_IDs = this.random_choose(this.all_vid,5);
 
@@ -291,11 +309,12 @@ var vm = new Vue({
           //console.log(res);
 
           for (var i=0;i<video_IDs.length;i++){
-              this.tmp_items[video_IDs[i]] = this.items[video_IDs[i]];
-              //this.tmp_items.push(this.items[video_IDs[i]]);
+              //this.tmp_items[video_IDs[i]] = this.items[video_IDs[i]];
+              this.result_items.push(this.items[video_IDs[i]]);
           }
 
-          this.max_page = (Object.keys(this.tmp_items).length-1)/this.pagination_num << 0 + 1;
+          this.max_page = (Object.keys(this.result_items).length-1)/this.pagination_num << 0 + 1;
+          this.changeSortMode(this.sort_mode);
           this.set_page(1);
 
           console.log(this.tmp_items);
@@ -305,7 +324,7 @@ var vm = new Vue({
         this.startLoading();
 
         // 初始最大頁面數
-        this.max_page = (Object.keys(this.tmp_items).length-1)/this.pagination_num << 0 + 1;
+        this.max_page = (Object.keys(this.result_items).length-1)/this.pagination_num << 0 + 1;
         //this.set_page(this.cur_page);
         //console.log(this.max_page);
 
