@@ -128,7 +128,7 @@ var vm = new Vue({
             this.cur_page = num;
             var element = document.getElementById("page"+this.cur_page);
             element.classList.add("active2");
-            this.tmp_items = this.result_items.slice((this.cur_page-1)*this.pagination_num, (this.cur_page-1)*this.pagination_num+4+1);
+            this.tmp_items = this.result_items.slice((this.cur_page-1)*this.pagination_num, (this.cur_page-1)*this.pagination_num+(this.pagination_num-1)+1);
             this.follow_cur_page();
           }
         },
@@ -313,7 +313,7 @@ var vm = new Vue({
               this.result_items.push(this.items[video_IDs[i]]);
           }
 
-          this.max_page = (Object.keys(this.result_items).length-1)/this.pagination_num << 0 + 1;
+          this.max_page = ( (Object.keys(this.result_items).length-1)/this.pagination_num << 0 ) + 1;
           this.changeSortMode(this.sort_mode);
           this.set_page(1);
 
@@ -324,7 +324,7 @@ var vm = new Vue({
         this.startLoading();
 
         // 初始最大頁面數
-        this.max_page = (Object.keys(this.result_items).length-1)/this.pagination_num << 0 + 1;
+        this.max_page = ( (Object.keys(this.result_items).length-1)/this.pagination_num << 0 ) + 1;
         //this.set_page(this.cur_page);
         //console.log(this.max_page);
 

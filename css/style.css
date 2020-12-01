@@ -271,6 +271,20 @@ header nav li{
     padding: 10px;
 }
 
+#demo-cards .geng-button button:hover{
+    transform: scale(1.2);
+    box-shadow:3px 3px 5px 6px#cccccc;
+    transition: .5s ease;
+    opacity: 1;
+}
+
+#demo-cards .selected-comment{
+    transform: scale(1.2);
+    /*filter:url(#shadow);*/
+    transition: .5s ease;
+    opacity: 1;
+}
+
 #demo .pagination .page-item{
     margin: 0 5;
 }

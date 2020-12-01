@@ -13,16 +13,14 @@
         
 
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-        <!--<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>--> 
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 
         <script src="http://www.youtube.com/player_api"></script>
-        <!--world cloud.js-->
-        <script src="https://d3js.org/d3.v6.min.js"></script>
-        <!--chart.js-->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+        <script src="https://d3js.org/d3.v6.min.js"></script><!--world cloud.js-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script><!--chart.js-->
         <!-- 引入測試data  
             流程 把 json 令一個變數，如test_data
             然後改名成.js 
@@ -151,9 +149,13 @@
                         <div class="row">
 
                             <div class="col-md-8 offset-md-2 text-center" @click="returnTmp();">
-                                <h2 class="lead"><span class="badge badge-primary" style="padding: 10;">Youtube</span> 影片</h2>
+                                <h2 class="lead"><span class="badge badge-primary" style="padding: 10;">Youtube</span> 影片<button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="bottom" title="不同於靜態資料導向，綜合分數是由使用者們的使用導向為出發點的計算結果。">
+                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-question-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.496 6.033a.237.237 0 0 1-.24-.247C5.35 4.091 6.737 3.5 8.005 3.5c1.396 0 2.672.73 2.672 2.24 0 1.08-.635 1.594-1.244 2.057-.737.559-1.01.768-1.01 1.486v.105a.25.25 0 0 1-.25.25h-.81a.25.25 0 0 1-.25-.246l-.004-.217c-.038-.927.495-1.498 1.168-1.987.59-.444.965-.736.965-1.371 0-.825-.628-1.168-1.314-1.168-.803 0-1.253.478-1.342 1.134-.018.137-.128.25-.266.25h-.825zm2.325 6.443c-.584 0-1.009-.394-1.009-.927 0-.552.425-.94 1.01-.94.609 0 1.028.388 1.028.94 0 .533-.42.927-1.029.927z"/>
+                                    </svg>
+                                </button></h2>
                             </div>
-
+                            
                             <div class="dropdown">
                                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                   依[[sort_mode]]排序
@@ -239,7 +241,7 @@
                         <!--呈現結果部分-->
                         <div id="demo-cards" class="container">
                             <div class=row>
-                            <div class="proto col-md-12" v-for="(info, vid) in tmp_items" :key="info.cid">  <!--vid 與 梗、聲量的內容檔-->
+                            <div class="proto col-md-12" v-for="(item, index) in tmp_items" :key="item.Info.id">  <!--vid 與 梗、聲量的內容檔-->
                                 <!-- 預覽部分 -->
                                 <!-- 標題、觀看次數、讚數-->
 
@@ -249,22 +251,22 @@
 
 
                                
-                                <div class="media" data-toggle="modal" :data-target="'#modalCenter_'+vid">
-                                            <img :src="'https://img.youtube.com/vi/'+vid+'/hqdefault.jpg'" width="263px" class="img-fluid" alt="Responsive image">
+                                <div class="media" data-toggle="modal" :data-target="'#modalCenter_'+item.Info.id">
+                                            <img :src="'https://img.youtube.com/vi/'+item.Info.id+'/hqdefault.jpg'" width="263px" class="img-fluid" alt="Responsive image">
                                             <div class="media-body" style="margin-left: 10;">
-                                              <h5 class="mt-0">[[info.Title]]</h5>
+                                              <h5 class="mt-0">[[item.Title]]</h5>
 
                                               <div class="row basic-data font-weight-bolder" style="padding: 5 10;">
 
-                                                    <p class="col-md-3">觀看次數: <br>[[info.Info.viewCount]] 次</p>
+                                                    <p class="col-md-3">觀看次數: <br>[[item.Info.viewCount]] 次</p>
                                                     
                                                     <p class="col-md-3">留言量:<br>
-                                                    [[info.Info.commentCount]] </p>   
+                                                    [[item.Info.commentCount]] </p>   
 
                                      <div class="col-md-3 offset-md-3 text-right text-nowrap">
                                                         <svg width="1.5em" height="1.8em" viewBox="0 0 16 16" class="bi bi-hand-thumbs-up" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                                             <path fill-rule="evenodd" d="M6.956 1.745C7.021.81 7.908.087 8.864.325l.261.066c.463.116.874.456 1.012.965.22.816.533 2.511.062 4.51a9.84 9.84 0 0 1 .443-.051c.713-.065 1.669-.072 2.516.21.518.173.994.681 1.2 1.273.184.532.16 1.162-.234 1.733.058.119.103.242.138.363.077.27.113.567.113.856 0 .289-.036.586-.113.856-.039.135-.09.273-.16.404.169.387.107.819-.003 1.148a3.163 3.163 0 0 1-.488.901c.054.152.076.312.076.465 0 .305-.089.625-.253.912C13.1 15.522 12.437 16 11.5 16v-1c.563 0 .901-.272 1.066-.56a.865.865 0 0 0 .121-.416c0-.12-.035-.165-.04-.17l-.354-.354.353-.354c.202-.201.407-.511.505-.804.104-.312.043-.441-.005-.488l-.353-.354.353-.354c.043-.042.105-.14.154-.315.048-.167.075-.37.075-.581 0-.211-.027-.414-.075-.581-.05-.174-.111-.273-.154-.315L12.793 9l.353-.354c.353-.352.373-.713.267-1.02-.122-.35-.396-.593-.571-.652-.653-.217-1.447-.224-2.11-.164a8.907 8.907 0 0 0-1.094.171l-.014.003-.003.001a.5.5 0 0 1-.595-.643 8.34 8.34 0 0 0 .145-4.726c-.03-.111-.128-.215-.288-.255l-.262-.065c-.306-.077-.642.156-.667.518-.075 1.082-.239 2.15-.482 2.85-.174.502-.603 1.268-1.238 1.977-.637.712-1.519 1.41-2.614 1.708-.394.108-.62.396-.62.65v4.002c0 .26.22.515.553.55 1.293.137 1.936.53 2.491.868l.04.025c.27.164.495.296.776.393.277.095.63.163 1.14.163h3.5v1H8c-.605 0-1.07-.081-1.466-.218a4.82 4.82 0 0 1-.97-.484l-.048-.03c-.504-.307-.999-.609-2.068-.722C2.682 14.464 2 13.846 2 13V9c0-.85.685-1.432 1.357-1.615.849-.232 1.574-.787 2.132-1.41.56-.627.914-1.28 1.039-1.639.199-.575.356-1.539.428-2.59z"/>
-                                                        </svg> [[info.Info.likeCount]]
+                                                        </svg> [[item.Info.likeCount]]
                                                     </div>
 
                                                 </div>
@@ -277,19 +279,19 @@
 
                                                     <div class="col-md-9">
                                                         <div class="progress">
-                                                            <div class="progress-bar bg-danger" role="progressbar" :style="'width:'+info.Discuss.Entertainment_Value*1000+'%'" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                                            <div class="progress-bar bg-danger" role="progressbar" :style="'width:'+item.Discuss.Entertainment_Value*1000+'%'" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                                                         </div>
                                                     </div>
                                                 </div>
                                                    <div class="container">
-                                                    <a :href="'https://www.youtube.com/channel/'+info.Cid" class="row btn btn-primary bg-danger" style="margin-left: 75%;">Go to Channel</a>
+                                                    <a :href="'https://www.youtube.com/channel/'+item.Cid" class="row btn btn-primary bg-danger" style="margin-left: 75%;">Go to Channel</a>
                                                     </div>
 
                                              </div>
                                         </div>
                               
 
-                                    <div class="modal fade" :id="'modalCenter_'+vid" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal fade" :id="'modalCenter_'+item.Info.id" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                           
                                             <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
                                                     
@@ -297,7 +299,7 @@
 
                                                     <div class="modal-header container">
                                                         <div class="row">
-                                                            <h5 class="modal-title">[[info.title]]</h5>                                   
+                                                            <h5 class="modal-title">[[item.title]]</h5>                                   
                                                         </div>
                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
@@ -313,30 +315,30 @@
         
                                                             <div class="col-md-9">
                                                                 <div class="progress">
-                                                                    <div class="progress-bar bg-success" role="progressbar" :style="'width:'+info.Discuss.Entertainment_Value*100+'%'" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                                                    <div class="progress-bar bg-success" role="progressbar" :style="'width:'+item.Discuss.Entertainment_Value*100+'%'" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                                                                 </div>
                                                             </div>
                                                         </div>
         
                                                         <div class="row video-data">
                                                             <div class="col-md-12">
-                                                                <div :id="'youtube'+vid" class="embed-responsive embed-responsive-21by9">
-                                                                    <iframe :onload="'player'+vid.replace('-','')+'=new YT.Player(this)'" class="embed-responsive-item vid" width="100%" object-fit="cover" :src="'https://www.youtube.com/embed/'+vid+'?enablejsapi=1'" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                                                <div :id="'youtube'+item.Info.id" class="embed-responsive embed-responsive-21by9">
+                                                                    <iframe :onload="'player'+item.Info.id.replace('-','')+'=new YT.Player(this)'" class="embed-responsive-item vid" width="100%" object-fit="cover" :src="'https://www.youtube.com/embed/'+item.Info.id+'?enablejsapi=1'" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                                                 </div>
                                                            
                                                                      
                                     <div class="row basic-data font-weight-bolder">
 
-                                                 <p class="col-md-3">觀看次數: <br>[[info.Info.viewCount]] 次</p>
+                                                 <p class="col-md-3">觀看次數: <br>[[item.Info.viewCount]] 次</p>
                                                     
                                                     <p class="col-md-3">留言量:<br>
-                                                    [[info.Info.commentCount]] </p>  
+                                                    [[item.Info.commentCount]] </p>  
                                                        
                                                        
                                         <div class="col-md-3 offset-md-3 text-right text-nowrap">
                                                 <svg width="1.5em" height="1.8em" viewBox="0 0 16 16" class="bi bi-hand-thumbs-up" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd" d="M6.956 1.745C7.021.81 7.908.087 8.864.325l.261.066c.463.116.874.456 1.012.965.22.816.533 2.511.062 4.51a9.84 9.84 0 0 1 .443-.051c.713-.065 1.669-.072 2.516.21.518.173.994.681 1.2 1.273.184.532.16 1.162-.234 1.733.058.119.103.242.138.363.077.27.113.567.113.856 0 .289-.036.586-.113.856-.039.135-.09.273-.16.404.169.387.107.819-.003 1.148a3.163 3.163 0 0 1-.488.901c.054.152.076.312.076.465 0 .305-.089.625-.253.912C13.1 15.522 12.437 16 11.5 16v-1c.563 0 .901-.272 1.066-.56a.865.865 0 0 0 .121-.416c0-.12-.035-.165-.04-.17l-.354-.354.353-.354c.202-.201.407-.511.505-.804.104-.312.043-.441-.005-.488l-.353-.354.353-.354c.043-.042.105-.14.154-.315.048-.167.075-.37.075-.581 0-.211-.027-.414-.075-.581-.05-.174-.111-.273-.154-.315L12.793 9l.353-.354c.353-.352.373-.713.267-1.02-.122-.35-.396-.593-.571-.652-.653-.217-1.447-.224-2.11-.164a8.907 8.907 0 0 0-1.094.171l-.014.003-.003.001a.5.5 0 0 1-.595-.643 8.34 8.34 0 0 0 .145-4.726c-.03-.111-.128-.215-.288-.255l-.262-.065c-.306-.077-.642.156-.667.518-.075 1.082-.239 2.15-.482 2.85-.174.502-.603 1.268-1.238 1.977-.637.712-1.519 1.41-2.614 1.708-.394.108-.62.396-.62.65v4.002c0 .26.22.515.553.55 1.293.137 1.936.53 2.491.868l.04.025c.27.164.495.296.776.393.277.095.63.163 1.14.163h3.5v1H8c-.605 0-1.07-.081-1.466-.218a4.82 4.82 0 0 1-.97-.484l-.048-.03c-.504-.307-.999-.609-2.068-.722C2.682 14.464 2 13.846 2 13V9c0-.85.685-1.432 1.357-1.615.849-.232 1.574-.787 2.132-1.41.56-.627.914-1.28 1.039-1.639.199-.575.356-1.539.428-2.59z"/>
-                                        </svg> [[info.Info.likeCount]]
+                                        </svg> [[item.Info.likeCount]]
                                         </div>
                                         </div>
                                 
@@ -347,45 +349,45 @@
                 <div class="row">
                     <div class="col-md-12">
 
-                        <ul class="nav nav-tabs" :id="'myTab'+vid" role="tablist">
+                        <ul class="nav nav-tabs" :id="'myTab'+item.Info.id" role="tablist">
                             <!--
                             <li class="nav-item" role="presentation">
                             <a class="nav-link active" :id="'geng-tab'+vid" data-toggle="tab" :href="'#geng'+vid" role="tab" :aria-controls="'geng'+vid" aria-selected="true">梗在這呢</a>
                             </li>
                             -->
                             <li class="nav-item" role="presentation">
-                            <a class="nav-link" :id="'cloud-tab'+vid" data-toggle="tab" :href="'#cloud'+vid" role="tab" :aria-controls="'cloud'+vid" aria-selected="false">大家都說</a>
+                            <a class="nav-link" :id="'cloud-tab'+item.Info.id" data-toggle="tab" :href="'#cloud'+item.Info.id" role="tab" :aria-controls="'cloud'+item.Info.id" aria-selected="false">大家都說</a>
                             </li>
                             <li class="nav-item" role="presentation">
-                            <a class="nav-link" :id="'radar-tab'+vid" data-toggle="tab" :href="'#radar'+vid" role="tab" :aria-controls="'radar'+vid" aria-selected="false">屬性圖</a>
+                            <a class="nav-link" :id="'radar-tab'+item.Info.id" data-toggle="tab" :href="'#radar'+item.Info.id" role="tab" :aria-controls="'radar'+item.Info.id" aria-selected="false">屬性圖</a>
 
                             </li>
                         </ul>
                                                         
                                                             
         
-                        <div class="tab-content" :id="'myTabContent'+vid">
+                        <div class="tab-content" :id="'myTabContent'+item.Info.id">
 
-                                <div class="tab-pane fade show active" :id="'cloud'+vid" role="tabpanel" :aria-labelledby="'cloud-tab'+vid">
+                                <div class="tab-pane fade show active" :id="'cloud'+item.Info.id" role="tabpanel" :aria-labelledby="'cloud-tab'+item.Info.id">
                                     <div class="container">
 
+                                        <!-- wordcloud -->
                                         <div class="wordcloud row">
                                             <div class="btns modal-body col-md-2">
                                                 <div class="align-self-center">
-                                                
+                                                    
                                                     <ul v-for="geng in info.Geng" v-bind:key="geng.name" class="geng-button list-group list-group-horizontal-sm">
                                                         
                                                         <button v-for="(geng_value,geng_name) in geng" 
                                                         v-bind:key="geng_value.time"
-                                                        type="button" class="list-group-item  list-group-item-action text-center" :onclick=`player${vid.replace('-','')}.seekTo(${geng_value.time-3},true);location.href='#youtube${vid}'`>[[geng_name]]</button>
+                                                        type="button" class="list-group-item  list-group-item-action text-center" :onclick=`player${item.Info.id.replace('-','')}.seekTo(${geng_value.time-3},true);location.href='#youtube${item.Info.id}'`>[[geng_name]]</button>
                                                         
                                                     </ul>
 
                                                 </div>
                                             </div>
 
-                                            <div class="chart modal-body col-md-10" :vid=`${vid}`>
-
+                                            <div class="chart modal-body col-md-10" :vid=`${item.Info.id}`>
                                                 <!-- bubble chart -->
                                                 
                                             </div>
@@ -394,8 +396,9 @@
                                     </div>                            
                                 </div>
 
-                                <div class="tab-pane fade" :id="'radar'+vid" role="tabpanel" :aria-labelledby="'radar-tab'+vid">
-                                    <div class="radar modal-body" :vid="vid">
+                                <!-- radar chart -->
+                                <div class="tab-pane fade" :id="'radar'+item.Info.id" role="tabpanel" :aria-labelledby="'radar-tab'+item.Info.id">
+                                    <div class="radar modal-body" :vid="item.Info.id">
                                         <canvas id="radarChart"></canvas>
                                 
                                             <!-- radar chart -->
@@ -409,7 +412,7 @@
                                                 
                                             
 
-                                                <a :href="'https://www.youtube.com/channel/'+info.cid" class="btn btn-primary">Go to Channel</a>
+                                                <a :href="'https://www.youtube.com/channel/'+item.Cid" class="btn btn-primary">Go to Channel</a>
                                             
                                         </div>
                                         
@@ -434,7 +437,7 @@
                       <li class="page-item">
                         <a class="page-link" href="#demo" tabindex="-1" @click="change_page(-1);" style="margin: 0 20;">Prev</a>
                       </li>
-                      <li class="page-item" v-for="(page, vid) in cur_pages" :key="page">
+                      <li class="page-item" v-for="(page, index) in cur_pages" :key="page">
                           <a class="page-link" :id="'page'+page" href="#demo" @click="set_page(page)">[[page]]</a>
                       </li>
                       <li class="page-item">
@@ -499,12 +502,24 @@
         </div>
 
         <!-- relative path -->
-        <!-- relative path -->
-        <script type="module" src="js/uid.js"></script>
         <script type="text/javascript" src="./js/wordcloud.js"></script>
         <script type="text/javascript" src="./js/vue-app.js"></script>
         <script type="text/javascript" src="./js/util.js"></script>
         <script type="text/javascript" src="./js/chart.js"></script>
+
+        <script>
+            $("#demo .geng-button").on("mouseenter", function(){
+                $("."+$(this).text()+" circle").addClass("selected-comment");
+            })
+
+            $("#demo .geng-button").on("mouseleave", function(){
+                $("."+$(this).text()+" circle").removeClass("selected-comment");
+            })
+
+            $(function () {
+                $('[data-toggle="tooltip"]').tooltip()
+            })
+        </script>
     </body>
 
 

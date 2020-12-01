@@ -45,10 +45,13 @@ chart = (data, btns) => {
       .attr("alt", "Responsive image")
       .attr("width", "100%");
 
+      //svg.append("filter").attr("id","shadow").append("feDropShadow").attr("dx", 0.2).attr("dy", 0.4).attr("stdDeviation", 0.1);
+
   const leaf = svg.selectAll("g")
-    .data(root.leaves())
+    .data(root.leaves(), d => d)
     .join("g")
-      .attr("transform", d => `translate(${d.x + 1},${d.y + 1})`);
+      .attr("transform", d => `translate(${d.x + 1},${d.y + 1})`)
+      .attr("class", d => `bublle ${d.data.group}`);
 
   leaf.append("circle")
       .attr("id", d => (d.leafUid = uid("leaf")).id)
@@ -88,5 +91,3 @@ width = 932
 height = width
 
 format = d3.format(",d")
-
-//d3 = require("d3@6")
