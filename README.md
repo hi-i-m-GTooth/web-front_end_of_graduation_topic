@@ -71,6 +71,13 @@
 * add Pagination (**temporarily only in draft html**)
 * add Sort Mode Choosing (**temporarily only in draft html**)
 * click geng will automatically roll to the video part
+* add data in Vue: "result_itmes" for query result
+* preserve data in Vue: "tmp_items" for showing items
+
+### Replace "Updated" with "Watch"
+* Remove "Updated" state to prevent frequently updating our page
+* change the way of binding wordcloud (Now by clicking Proto Objects)
+* in "Watch", "max_page" of pagination depends on the change of "result_items"
 
 # Note
 ### bootstrap
