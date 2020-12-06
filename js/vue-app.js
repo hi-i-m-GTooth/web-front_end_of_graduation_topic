@@ -148,6 +148,25 @@ var vm = new Vue({
           }
         },
 
+        bindWordCloud(_id){
+          var global_this = this;
+          var toggle = "#modalCenter_"+_id;
+          console.log("bind wordcloud to: "+toggle);
+
+          d3.select(document.body)
+          .selectAll(toggle+" .wordcloud")
+          .each(function(d,i){
+              var btns_this = d3.select(this).select(".btns");
+              var vid = d3.select(this).select(".chart").attr("vid");
+              if(global_this.items[vid]["word_cloud"]!=undefined){
+                if(d3.select(this).select(".chart svg").empty()){
+                  d3.select(this).select(".chart").node()
+                    .appendChild(chart(global_this.items[vid]["word_cloud"], btns_this))
+                }
+              }
+          })
+        },
+
         //==============================================================//
         //==============================================================//
 
@@ -297,19 +316,14 @@ var vm = new Vue({
 
 
     mounted: function(){  // 隨機選出n部影片呈現給使用者
-          //this.tmp_items = {};
+          this.result_items = [];
           this.tmp_items = [];
 
-          //video_IDs = this.random_choose(this.all_vid,5);
-
-          //video_IDs = ["00w3Yf9gJlU","075Y1XWUn30","09X9_Hesn5o","0A3Iilngu_g","0B1DyDd6SCg"]
           video_IDs = ["F7Jw5yn2-Rw","00w3Yf9gJlU","075Y1XWUn30","09X9_Hesn5o","0A3Iilngu_g","0B1DyDd6SCg"]
-          //video_IDs = ["00w3Yf9gJlU"]
 
           //console.log(res);
 
           for (var i=0;i<video_IDs.length;i++){
-              //this.tmp_items[video_IDs[i]] = this.items[video_IDs[i]];
               this.result_items.push(this.items[video_IDs[i]]);
           }
 
@@ -320,30 +334,13 @@ var vm = new Vue({
           console.log(this.tmp_items);
     },
 
-    updated: function(){
-        this.startLoading();
-
+    watch: {
+      result_items: function(val){
         // 初始最大頁面數
         this.max_page = ( (Object.keys(this.result_items).length-1)/this.pagination_num << 0 ) + 1;
-        //this.set_page(this.cur_page);
-        //console.log(this.max_page);
+        console.log("新的最大頁數："+this.max_page);
+      },
 
-        // 製作文字Sunburst圖
-        // WARNING!! data.js資料格式不對！
-        var global_this = this;
-
-        d3.select(document.body)
-          .selectAll(".wordcloud")
-          .each(function(d,i){
-            var btns_this = d3.select(this).select(".btns");
-            var vid = d3.select(this).select(".chart").attr("vid");
-            if(global_this.items[vid]["word_cloud"]!=undefined){
-              d3.select(this).select(".chart").node()
-                .appendChild(chart(global_this.items[vid]["word_cloud"], btns_this))
-            }
-          })
-          
-        this.endLoading();
     },
 
 });

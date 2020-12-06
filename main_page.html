@@ -241,7 +241,7 @@
                         <!--呈現結果部分-->
                         <div id="demo-cards" class="container">
                             <div class=row>
-                            <div class="proto col-md-12" v-for="(item, index) in tmp_items" :key="item.Info.id">  <!--vid 與 梗、聲量的內容檔-->
+                            <div class="proto col-md-12" v-for="(item, index) in tmp_items" :key="item.Info.id" @click="bindWordCloud(item.Info.id);">  <!--vid 與 梗、聲量的內容檔-->
                                 <!-- 預覽部分 -->
                                 <!-- 標題、觀看次數、讚數-->
 
