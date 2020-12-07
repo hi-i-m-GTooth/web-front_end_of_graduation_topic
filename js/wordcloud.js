@@ -51,7 +51,7 @@ chart = (data, btns) => {
     .data(root.leaves(), d => d)
     .join("g")
       .attr("transform", d => `translate(${d.x + 1},${d.y + 1})`)
-      .attr("class", d => `bublle ${d.data.group}`);
+      .attr("class", d => `bublle ${d.data.group}`.replace(/,!/g, ''));
 
   leaf.append("circle")
       .attr("id", d => (d.leafUid = uid("leaf")).id)

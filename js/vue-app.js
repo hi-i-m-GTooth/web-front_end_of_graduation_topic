@@ -158,10 +158,10 @@ var vm = new Vue({
           .each(function(d,i){
               var btns_this = d3.select(this).select(".btns");
               var vid = d3.select(this).select(".chart").attr("vid");
-              if(global_this.items[vid]["word_cloud"]!=undefined){
+              if(global_this.items[vid]["Word_Cloud"]!=undefined){
                 if(d3.select(this).select(".chart svg").empty()){
                   d3.select(this).select(".chart").node()
-                    .appendChild(chart(global_this.items[vid]["word_cloud"], btns_this))
+                    .appendChild(chart(global_this.items[vid]["Word_Cloud"], btns_this))
                 }
               }
           })
