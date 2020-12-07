@@ -331,7 +331,7 @@
                                                                      
                                     <div class="row basic-data font-weight-bolder">
 
-                                                 <p class="col-md-3">觀看次數: <br>[[item.Info.viewCount]] 次</p>
+                                                 <p class="col-md-3" data-toggle="tooltip" data-container="body" data-placement="bottom" title="我的代碼是289673635277歡迎大家一起加好友">觀看次數: <br>[[item.Info.viewCount]] 次</p>
                                                     
                                                     <p class="col-md-3">留言量:<br>
                                                     [[item.Info.commentCount]] </p>  
@@ -512,11 +512,11 @@
 
         <script>
             $("#demo .geng-button").on("mouseenter", function(){
-                $("."+$(this).text().replace(/,!/g, '')+" circle").addClass("selected-comment");
+                $("."+$(this).text().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, '')+" circle").addClass("selected-comment");
             })
 
             $("#demo .geng-button").on("mouseleave", function(){
-                $("."+$(this).text().replace(/,!/g, '')+" circle").removeClass("selected-comment");
+                $("."+$(this).text().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, '')+" circle").removeClass("selected-comment");
             })
 
             $(function () {

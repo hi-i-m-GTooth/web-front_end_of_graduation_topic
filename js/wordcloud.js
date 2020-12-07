@@ -51,13 +51,17 @@ chart = (data, btns) => {
     .data(root.leaves(), d => d)
     .join("g")
       .attr("transform", d => `translate(${d.x + 1},${d.y + 1})`)
-      .attr("class", d => `bublle ${d.data.group}`.replace(/,!/g, ''));
+      .attr("class", d => `bublle ${d.data.group}`.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, ''));
 
   leaf.append("circle")
       .attr("id", d => (d.leafUid = uid("leaf")).id)
       .attr("r", d => d.r)
       .attr("fill-opacity", 0.7)
-      .attr("fill", d => color(d.data.group));
+      .attr("fill", d => color(d.data.group))
+      .attr("data-toggle", "tooltip")
+      .attr("data-container", "body")
+      .attr("data-placement", "bottom")
+      .attr("title", d => d.data.name);
 
   leaf.append("clipPath")
       .attr("id", d => (d.clipUid = uid("clip")).id)
