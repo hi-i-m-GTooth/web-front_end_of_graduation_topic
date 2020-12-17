@@ -1,5 +1,4 @@
 <html>
-    
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Where Geng</title>
@@ -8,8 +7,8 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@500&family=Noto+Serif+TC&display=swap">
         <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
         <!-- relative path -->
-        <link rel="stylesheet" href="./css/style.css">
-        <link rel="stylesheet" href="./css/wordcloud.css">
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/wordcloud.css">
         
 
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -19,8 +18,10 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 
         <script src="http://www.youtube.com/player_api"></script>
-        <script src="https://d3js.org/d3.v6.min.js"></script><!--world cloud.js-->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script><!--chart.js-->
+        <!--world cloud.js-->
+        <script src="https://d3js.org/d3.v6.min.js"></script>
+        <!--chart.js-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
         <!-- 引入測試data  
             流程 把 json 令一個變數，如test_data
             然後改名成.js 
@@ -29,6 +30,7 @@
         <script type="text/javascript" src="js/data.js"></script>
         <script type="text/javascript" src="js/keyword.js"></script>
         <script type="text/javascript" src="js/videoID.js"></script>
+
         
 
         <!-- 引入區 -->
@@ -38,14 +40,13 @@
     <body>
         <div id="app">
 
-            <!--
             <header>
 
                 <div class='container'>
 
                     <nav class="navbar navbar-expand-lg navbar-light">
-                        relative path
-                        <a class="navbar-brand" href="#"><img src="./img/brand.png"></a>
+                        <!-- relative path -->
+                        <a class="navbar-brand" href="#"><img src="img/brand.png"></a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                         </button>
@@ -85,13 +86,12 @@
 
 
             </header>
-        -->
 
-        <!--
+
             <section id='intro'>
             
 
-            <!-- 以下為功能測試 - 滑動式大圖兼介紹 
+            <!-- 以下為功能測試 - 滑動式大圖兼介紹 -->
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel"  data-interval="0">
                 <ol class="carousel-indicators">
                     <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -101,7 +101,7 @@
                 <div class="carousel-inner">
                     <div class="carousel-item active">
                     <img class="d-block w-100" src="https://cdn.pixabay.com/photo/2016/03/09/09/22/girl-1245773_1280.jpg" alt="First slide" sytle="height: 70vh;">
-                    <div class="carousel-content">  <!--設定圖片中的文字，字體、位置等設定在CSS .carousel-content中
+                    <div class="carousel-content">  <!--設定圖片中的文字，字體、位置等設定在CSS .carousel-content中-->
                         <p style="font-size: 25px;">找出你最想要看到的 '梗'</p>
                         <h1>今天沒什麼時間？就別自己翻影片了！交給我們吧！</h1>
                     </div>
@@ -133,20 +133,14 @@
             </div>
 
 
-            <!-- 以上為功能測試
+            <!-- 以上為功能測試-->
 
             </section>
-        -->
+
 
             <section id='demo'>
 
                     <div class="container">
-
-                        <div id="loading-page" class="ld-modal">
-                            <div class="spinner-border text-danger" role="status">
-                                <span class="sr-only">Loading...</span>
-                            </div>
-                        </div>
 
                         <div class="row">
 
@@ -157,13 +151,17 @@
                                     </svg>
                                 </button></h2>
                             </div>
-                            
+
                             <div class="dropdown">
                                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                   依[[sort_mode]]排序
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                  <button class="dropdown-item" type="button" @click="changeSortMode('綜合分數');">依綜合分數排序</button>
+                                  <button class="dropdown-item" type="button" @click="changeSortMode('娛樂程度');">依娛樂程度排序</button>
+                                  <button class="dropdown-item" type="button" @click="changeSortMode('觀眾黏著度');">依觀眾黏著度排序</button>
+                                  <button class="dropdown-item" type="button" @click="changeSortMode('主角人氣');">依主角人氣排序</button>
+                                  <button class="dropdown-item" type="button" @click="changeSortMode('含梗量');">依含梗量排序</button>
+                                  <button class="dropdown-item" type="button" @click="changeSortMode('基本面');">依基本面排序</button>
                                   <button class="dropdown-item" type="button" @click="changeSortMode('觀看次數');">依觀看次數排序</button>
                                   <button class="dropdown-item" type="button" @click="changeSortMode('按讚數量');">依按讚數量排序</button>
                                 </div>
@@ -175,15 +173,15 @@
                              <!--以下是mode==0 ，關鍵字推薦模式-->
                             <div class="container tool-bar">
 
-                                <div v-if="mode==0" class="row justify-content-center">
+                                <div v-show="mode==0" class="row justify-content-center">
                                     
                                     <button class="col-md-1 btn btn-change-mode " @click="changeMode">
 
                                         <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                             <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
                                             <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
-                                            <p>切換搜尋</p>
                                         </svg>
+                                        <p>切換搜尋</p>
                                     </button>
                                     <!-- 泛化關鍵字搜尋產生 -->
                                     <!-- 之後再使用隨機生成n個即可 -->
@@ -198,7 +196,7 @@
                                 <!--以下是mode==1 ，搜尋模式-->
                        
                                     
-                                 <div v-if="mode==1" class="row justify-content-center">
+                                 <div v-show="mode==1" class="row justify-content-center">
                                             
                                             <button class="col-md-1 btn btn-change-mode " @click="changeMode">
                                                 <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-toggles" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -208,16 +206,30 @@
                                             </button>
                                        
                                             <!--可由col-md-n 直接寬度調整大小-->
-                                            <div class="tool-bar-interact ">
-                                            <input id="search" v-model="query" class="col-md-12 form-control form-control-lg" type="search" placeholder="--Search Here--" aria-label="Search" >
-                                            <button class="col-md-2 btn btn-outline-dark" type="submit" @click="sendKeywordQuery">Search</button>
+                                            <div id="search-bar" class="tool-bar-interact ">
+                                                <input id="search-box" v-model="query" class="col-md-12 form-control form-control-lg" type="search" placeholder="Search ..." aria-label="Search" >
+
+                                                <svg style="z-index:100; margin: 0 5; margin-top: 15;" data-toggle="tooltip" data-placement="bottom" title="搜尋結果來自標題" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="yellow" class="tags bi bi-award-fill" viewBox="0 0 16 16">
+                                                    <path d="M8 0l1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864 8 0z"/>
+                                                    <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1 4 11.794z"/>
+                                                </svg>
+                                                <svg style="z-index:100; margin: 0 5; margin-top: 15;" data-toggle="tooltip" data-placement="bottom" title="搜尋結果來自留言區" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="blue" class="tags bi bi-award-fill" viewBox="0 0 16 16">
+                                                    <path d="M8 0l1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864 8 0z"/>
+                                                    <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1 4 11.794z"/>
+                                                </svg>
+                                                <svg style="z-index:100; margin: 0 5; margin-top: 15;" data-toggle="tooltip" data-placement="bottom" title="搜尋結果來自其他" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="green" class="tags bi bi-award-fill" viewBox="0 0 16 16">
+                                                    <path d="M8 0l1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864 8 0z"/>
+                                                    <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1 4 11.794z"/>
+                                                </svg>
+                        
+                                                <button style="display: none;" id="search-button" class="col-md-2 btn btn-outline-dark" type="submit" @click="sendKeywordQuery">Search</button>
                                             </div>
                                     </div>
              
                     
                                 <!-- 以下是mode==2  拉桿模式 -->
                             
-                                    <div v-if="mode==2" class="row justify-content-center">
+                                    <div v-show="mode==2" class="row justify-content-center">
                                         
                                             <button class="col-md-1 btn btn-change-mode " @click="changeMode">
                                                 <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-columns-gap" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -227,9 +239,9 @@
                                             </button>
                                             <div class="tool-bar-interact ">
                                             <label>[[rangeOutput]]</label>
-                                            <input type="range" class="custom-range" min="0" max="4" id="customRange2" @change="updateRangeValue($event)">
-                                            <!--傳參數方法 -->
-                                            <button class="col-md-2 btn btn-outline-dark" type="submit" @click="rangeValueQuery(rangeOutput)">submit</button>
+                                            <input type="range" class="custom-range" min="0" max="4" id="customRange2" @change="updateRangeValue($event)"> 
+                                            <button class="col-md-2 btn btn-outline-dark" type="submit" @click="returnToResult()">顯示全部</button>
+                        
                                             </div>
                                     </div>
                              
@@ -240,215 +252,237 @@
 
                         <hr/>
 
-                        <!--呈現結果部分-->
-                        <div id="demo-cards" class="container">
-                            <div class=row>
-                            <div class="proto col-md-12" v-for="(item, index) in tmp_items" :key="item.Info.id" @click="bindWordCloud(item.Info.id);">  <!--vid 與 梗、聲量的內容檔-->
-                                <!-- 預覽部分 -->
-                                <!-- 標題、觀看次數、讚數-->
+                        <div v-show="loading==0"> 
+                            <!--呈現結果部分-->
+                            <div id="demo-cards" class="container">
+                                <div class=row>
+                                <div class="proto col-md-12" v-for="(item, index) in tmp_items" :key="item.Info.id" @click="bindWordCloud(item.Info.id); bindYt('player'+item.Info.id.replace('-',''));">  <!--vid 與 梗、聲量的內容檔-->
+                                    <!-- 預覽部分 -->
+                                    <!-- 標題、觀看次數、讚數-->
+                                    <svg v-show="item.Tags=='caption_result'" style="position: absolute; top:0; left:0; z-index:100;" xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="blue" class="tags bi bi-award-fill" viewBox="0 0 16 16">
+                                        <path d="M8 0l1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864 8 0z"/>
+                                        <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1 4 11.794z"/>
+                                    </svg>
+                                    <svg v-show="item.Tags=='title_result'" style="position: absolute; top:0; left:0; z-index:100;" xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="yellow" class="tags bi bi-award-fill" viewBox="0 0 16 16">
+                                        <path d="M8 0l1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864 8 0z"/>
+                                        <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1 4 11.794z"/>
+                                    </svg>
+                                    <svg v-show="item.Tags=='embedding_result'" style="position: absolute; top:0; left:0; z-index:100;" xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="green" class="tags bi bi-award-fill" viewBox="0 0 16 16">
+                                        <path d="M8 0l1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864 8 0z"/>
+                                        <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1 4 11.794z"/>
+                                    </svg>
 
-                       
+                                    <div class="media" data-toggle="modal" :data-target="'#modalCenter_'+item.Info.id">
+
+                                        <img :src="'https://img.youtube.com/vi/'+item.Info.id+'/hqdefault.jpg'" width="263px" class="img-fluid" alt="Responsive image">
+                                        <div class="media-body" style="margin-left: 10;">
+                                        <h5 class="mt-0">[[item.Title]]</h5>
+
+                                        <div class="row basic-data font-weight-bolder" style="padding: 5 10;">
+
+                                                <p class="col-md-3">觀看次數: <br>[[item.Info.viewCount]] 次</p>
+                                                
+                                                <p class="col-md-3">留言量:<br>
+                                                [[item.Info.commentCount]] </p>   
+
+                                        <div class="col-md-3 offset-md-3 text-right text-nowrap">
+                                                            <svg width="1.5em" height="1.8em" viewBox="0 0 16 16" class="bi bi-hand-thumbs-up" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                                <path fill-rule="evenodd" d="M6.956 1.745C7.021.81 7.908.087 8.864.325l.261.066c.463.116.874.456 1.012.965.22.816.533 2.511.062 4.51a9.84 9.84 0 0 1 .443-.051c.713-.065 1.669-.072 2.516.21.518.173.994.681 1.2 1.273.184.532.16 1.162-.234 1.733.058.119.103.242.138.363.077.27.113.567.113.856 0 .289-.036.586-.113.856-.039.135-.09.273-.16.404.169.387.107.819-.003 1.148a3.163 3.163 0 0 1-.488.901c.054.152.076.312.076.465 0 .305-.089.625-.253.912C13.1 15.522 12.437 16 11.5 16v-1c.563 0 .901-.272 1.066-.56a.865.865 0 0 0 .121-.416c0-.12-.035-.165-.04-.17l-.354-.354.353-.354c.202-.201.407-.511.505-.804.104-.312.043-.441-.005-.488l-.353-.354.353-.354c.043-.042.105-.14.154-.315.048-.167.075-.37.075-.581 0-.211-.027-.414-.075-.581-.05-.174-.111-.273-.154-.315L12.793 9l.353-.354c.353-.352.373-.713.267-1.02-.122-.35-.396-.593-.571-.652-.653-.217-1.447-.224-2.11-.164a8.907 8.907 0 0 0-1.094.171l-.014.003-.003.001a.5.5 0 0 1-.595-.643 8.34 8.34 0 0 0 .145-4.726c-.03-.111-.128-.215-.288-.255l-.262-.065c-.306-.077-.642.156-.667.518-.075 1.082-.239 2.15-.482 2.85-.174.502-.603 1.268-1.238 1.977-.637.712-1.519 1.41-2.614 1.708-.394.108-.62.396-.62.65v4.002c0 .26.22.515.553.55 1.293.137 1.936.53 2.491.868l.04.025c.27.164.495.296.776.393.277.095.63.163 1.14.163h3.5v1H8c-.605 0-1.07-.081-1.466-.218a4.82 4.82 0 0 1-.97-.484l-.048-.03c-.504-.307-.999-.609-2.068-.722C2.682 14.464 2 13.846 2 13V9c0-.85.685-1.432 1.357-1.615.849-.232 1.574-.787 2.132-1.41.56-.627.914-1.28 1.039-1.639.199-.575.356-1.539.428-2.59z"/>
+                                                            </svg> [[item.Info.likeCount]]
+                                                        </div>
+
+                                                    </div>
+                                                    <!-- 娛樂值-->
+
+                                                    <div class="row like-ratio" style="margin: 20 0;">
+                                                        <div class="col-md-3 text-center">
+                                                            <a>[[sort_mode]]</a>
+                                                        </div>
+
+                                                        <div class="col-md-9">
+                                                            <div class="progress">
+                                                                <div v-if="sort_mode=='娛樂程度'" class="progress-bar bg-danger" role="progressbar" :style="'width:'+(item.Discuss.Entertainment_Value/entertainment_value_max)*100+'%'" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">[[Math.round(item.Discuss.Entertainment_Value/entertainment_value_max*100*100)/100]] %</div>
+                                                                <div v-else-if="sort_mode=='觀眾黏著度'" class="progress-bar bg-danger" role="progressbar" :style="'width:'+(item.Discuss.Connectivity/connectivity_max)*100+'%'" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">[[Math.round(item.Discuss.Connectivity/connectivity_max*100*100)/100]] %</div>
+                                                                <div v-else-if="sort_mode=='主角人氣'" class="progress-bar bg-danger" role="progressbar" :style="'width:'+(item.Discuss.Metrics/metrics_max)*100+'%'" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">[[Math.round(item.Discuss.Metrics/metrics_max*100*100)/100]] %</div>
+                                                                <div v-else-if="sort_mode=='含梗量'" class="progress-bar bg-danger" role="progressbar" :style="'width:'+(item.Discuss.Geng_Ratio/geng_ratio_max)*100+'%'" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">[[Math.round(item.Discuss.Geng_Ratio/geng_ratio_max*100*100)/100]] %</div>
+                                                                <div v-else-if="sort_mode=='基本面'" class="progress-bar bg-danger" role="progressbar" :style="'width:'+(item.Discuss.Comment_Ratio/comment_ratio_max)*100+'%'" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">[[Math.round(item.Discuss.Comment_Ratio/comment_ratio_max*100*100)/100]] %</div>
+                                                                <div v-else-if="sort_mode=='觀看次數'" class="progress-bar bg-danger" role="progressbar" :style="'width:'+(item.Info.viewCount/view_count_max)*100+'%'" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">[[item.Info.viewCount]]</div>
+                                                                <div v-else-if="sort_mode=='按讚數量'" class="progress-bar bg-danger" role="progressbar" :style="'width:'+(item.Info.likeCount/like_count_max)*100+'%'" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">[[item.Info.likeCount]]</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="container">
+                                                        <a :href="'https://www.youtube.com/channel/'+item.Cid" class="row btn btn-primary bg-danger" style="margin-left: 75%;">Go to Channel</a>
+                                                        </div>
+
+                                                </div>
+                                            </div>
                                 
 
+                                        <div class="modal fade" :id="'modalCenter_'+item.Info.id" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                            
+                                                <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+                                                        
+                                                    <div class="modal-content">
 
+                                                        <div class="modal-header container">
+                                                            <div class="row">
+                                                                <h5 class="modal-title">[[item.title]]</h5>                                   
+                                                            </div>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
 
-                               
-                                <div class="media" data-toggle="modal" :data-target="'#modalCenter_'+item.Info.id">
-                                            <img :src="'https://img.youtube.com/vi/'+item.Info.id+'/hqdefault.jpg'" width="263px" class="img-fluid" alt="Responsive image">
-                                            <div class="media-body" style="margin-left: 10;">
-                                              <h5 class="mt-0">[[item.Title]]</h5>
-
-                                              <div class="row basic-data font-weight-bolder" style="padding: 5 10;">
+                                                        <div class="modal-body">
+            
+                                                            <div class="row like-ratio">
+                                                                <div class="col-md-3 text-center">
+                                                                    <a>綜合分數</a>
+                                                                </div>
+            
+                                                                <div class="col-md-9">
+                                                                    <div class="progress">
+                                                                        <div class="progress-bar bg-success" role="progressbar" :style="'width:'+item.Discuss.Entertainment_Value*100+'%'" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+            
+                                                            <div class="row video-data">
+                                                                <div class="col-md-12">
+                                                                    <div :id="'youtube'+item.Info.id" class="embed-responsive embed-responsive-21by9">
+                                                                        <iframe :onload="'player'+item.Info.id.replace('-','')+'=new YT.Player(this)'" class="embed-responsive-item vid" width="100%" object-fit="cover" :src="'https://www.youtube.com/embed/'+item.Info.id+'?enablejsapi=1'" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                                                    </div>
+                                                            
+                                                                        
+                                        <div class="row basic-data font-weight-bolder">
 
                                                     <p class="col-md-3">觀看次數: <br>[[item.Info.viewCount]] 次</p>
-                                                    
-                                                    <p class="col-md-3">留言量:<br>
-                                                    [[item.Info.commentCount]] </p>   
-
-                                     <div class="col-md-3 offset-md-3 text-right text-nowrap">
-                                                        <svg width="1.5em" height="1.8em" viewBox="0 0 16 16" class="bi bi-hand-thumbs-up" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                            <path fill-rule="evenodd" d="M6.956 1.745C7.021.81 7.908.087 8.864.325l.261.066c.463.116.874.456 1.012.965.22.816.533 2.511.062 4.51a9.84 9.84 0 0 1 .443-.051c.713-.065 1.669-.072 2.516.21.518.173.994.681 1.2 1.273.184.532.16 1.162-.234 1.733.058.119.103.242.138.363.077.27.113.567.113.856 0 .289-.036.586-.113.856-.039.135-.09.273-.16.404.169.387.107.819-.003 1.148a3.163 3.163 0 0 1-.488.901c.054.152.076.312.076.465 0 .305-.089.625-.253.912C13.1 15.522 12.437 16 11.5 16v-1c.563 0 .901-.272 1.066-.56a.865.865 0 0 0 .121-.416c0-.12-.035-.165-.04-.17l-.354-.354.353-.354c.202-.201.407-.511.505-.804.104-.312.043-.441-.005-.488l-.353-.354.353-.354c.043-.042.105-.14.154-.315.048-.167.075-.37.075-.581 0-.211-.027-.414-.075-.581-.05-.174-.111-.273-.154-.315L12.793 9l.353-.354c.353-.352.373-.713.267-1.02-.122-.35-.396-.593-.571-.652-.653-.217-1.447-.224-2.11-.164a8.907 8.907 0 0 0-1.094.171l-.014.003-.003.001a.5.5 0 0 1-.595-.643 8.34 8.34 0 0 0 .145-4.726c-.03-.111-.128-.215-.288-.255l-.262-.065c-.306-.077-.642.156-.667.518-.075 1.082-.239 2.15-.482 2.85-.174.502-.603 1.268-1.238 1.977-.637.712-1.519 1.41-2.614 1.708-.394.108-.62.396-.62.65v4.002c0 .26.22.515.553.55 1.293.137 1.936.53 2.491.868l.04.025c.27.164.495.296.776.393.277.095.63.163 1.14.163h3.5v1H8c-.605 0-1.07-.081-1.466-.218a4.82 4.82 0 0 1-.97-.484l-.048-.03c-.504-.307-.999-.609-2.068-.722C2.682 14.464 2 13.846 2 13V9c0-.85.685-1.432 1.357-1.615.849-.232 1.574-.787 2.132-1.41.56-.627.914-1.28 1.039-1.639.199-.575.356-1.539.428-2.59z"/>
-                                                        </svg> [[item.Info.likeCount]]
-                                                    </div>
-
-                                                </div>
-                                                <!-- 娛樂值-->
-
-                                                <div class="row like-ratio" style="margin: 20 0;">
-                                                    <div class="col-md-3 text-center">
-                                                        <a>綜合分數</a>
-                                                    </div>
-
-                                                    <div class="col-md-9">
-                                                        <div class="progress">
-                                                            <div class="progress-bar bg-danger" role="progressbar" :style="'width:'+item.Discuss.Entertainment_Value*100+'%'" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                   <div class="container">
-                                                    <a :href="'https://www.youtube.com/channel/'+item.Cid" class="row btn btn-primary bg-danger" style="margin-left: 75%;">Go to Channel</a>
-                                                    </div>
-
-                                             </div>
-                                        </div>
-                              
-
-                                    <div class="modal fade" :id="'modalCenter_'+item.Info.id" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                          
-                                            <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
-                                                    
-                                                <div class="modal-content">
-
-                                                    <div class="modal-header container">
-                                                        <div class="row">
-                                                            <h5 class="modal-title">[[item.title]]</h5>                                   
-                                                        </div>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-
-                                                    <div class="modal-body">
-        
-                                                        <div class="row like-ratio">
-                                                            <div class="col-md-3 text-center">
-                                                                <a>綜合分數</a>
-                                                            </div>
-        
-                                                            <div class="col-md-9">
-                                                                <div class="progress">
-                                                                    <div class="progress-bar bg-success" role="progressbar" :style="'width:'+item.Discuss.Entertainment_Value*100+'%'" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-        
-                                                        <div class="row video-data">
-                                                            <div class="col-md-12">
-                                                                <div :id="'youtube'+item.Info.id" class="embed-responsive embed-responsive-21by9">
-                                                                    <iframe :onload="'player'+item.Info.id.replace('-','')+'=new YT.Player(this)'" class="embed-responsive-item vid" width="100%" object-fit="cover" :src="'https://www.youtube.com/embed/'+item.Info.id+'?enablejsapi=1'" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                                                </div>
-                                                           
-                                                                     
-                                    <div class="row basic-data font-weight-bolder">
-
-                                                 <p class="col-md-3" data-toggle="tooltip" data-container="body" data-placement="bottom" title="我的代碼是289673635277歡迎大家一起加好友">觀看次數: <br>[[item.Info.viewCount]] 次</p>
-                                                    
-                                                    <p class="col-md-3">留言量:<br>
-                                                    [[item.Info.commentCount]] </p>  
-                                                       
-                                                       
-                                        <div class="col-md-3 offset-md-3 text-right text-nowrap">
-                                                <svg width="1.5em" height="1.8em" viewBox="0 0 16 16" class="bi bi-hand-thumbs-up" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" d="M6.956 1.745C7.021.81 7.908.087 8.864.325l.261.066c.463.116.874.456 1.012.965.22.816.533 2.511.062 4.51a9.84 9.84 0 0 1 .443-.051c.713-.065 1.669-.072 2.516.21.518.173.994.681 1.2 1.273.184.532.16 1.162-.234 1.733.058.119.103.242.138.363.077.27.113.567.113.856 0 .289-.036.586-.113.856-.039.135-.09.273-.16.404.169.387.107.819-.003 1.148a3.163 3.163 0 0 1-.488.901c.054.152.076.312.076.465 0 .305-.089.625-.253.912C13.1 15.522 12.437 16 11.5 16v-1c.563 0 .901-.272 1.066-.56a.865.865 0 0 0 .121-.416c0-.12-.035-.165-.04-.17l-.354-.354.353-.354c.202-.201.407-.511.505-.804.104-.312.043-.441-.005-.488l-.353-.354.353-.354c.043-.042.105-.14.154-.315.048-.167.075-.37.075-.581 0-.211-.027-.414-.075-.581-.05-.174-.111-.273-.154-.315L12.793 9l.353-.354c.353-.352.373-.713.267-1.02-.122-.35-.396-.593-.571-.652-.653-.217-1.447-.224-2.11-.164a8.907 8.907 0 0 0-1.094.171l-.014.003-.003.001a.5.5 0 0 1-.595-.643 8.34 8.34 0 0 0 .145-4.726c-.03-.111-.128-.215-.288-.255l-.262-.065c-.306-.077-.642.156-.667.518-.075 1.082-.239 2.15-.482 2.85-.174.502-.603 1.268-1.238 1.977-.637.712-1.519 1.41-2.614 1.708-.394.108-.62.396-.62.65v4.002c0 .26.22.515.553.55 1.293.137 1.936.53 2.491.868l.04.025c.27.164.495.296.776.393.277.095.63.163 1.14.163h3.5v1H8c-.605 0-1.07-.081-1.466-.218a4.82 4.82 0 0 1-.97-.484l-.048-.03c-.504-.307-.999-.609-2.068-.722C2.682 14.464 2 13.846 2 13V9c0-.85.685-1.432 1.357-1.615.849-.232 1.574-.787 2.132-1.41.56-.627.914-1.28 1.039-1.639.199-.575.356-1.539.428-2.59z"/>
-                                        </svg> [[item.Info.likeCount]]
-                                        </div>
-                                        </div>
-                                
-
-                                        </div>
-                                        </div>
-         
-                <div class="row">
-                    <div class="col-md-12">
-
-                        <ul class="nav nav-tabs" :id="'myTab'+item.Info.id" role="tablist">
-                            <!--
-                            <li class="nav-item" role="presentation">
-                            <a class="nav-link active" :id="'geng-tab'+vid" data-toggle="tab" :href="'#geng'+vid" role="tab" :aria-controls="'geng'+vid" aria-selected="true">梗在這呢</a>
-                            </li>
-                            -->
-                            <li class="nav-item" role="presentation">
-                            <a class="nav-link" :id="'cloud-tab'+item.Info.id" data-toggle="tab" :href="'#cloud'+item.Info.id" role="tab" :aria-controls="'cloud'+item.Info.id" aria-selected="false">大家都說</a>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                            <a class="nav-link" :id="'radar-tab'+item.Info.id" data-toggle="tab" :href="'#radar'+item.Info.id" role="tab" :aria-controls="'radar'+item.Info.id" aria-selected="false">屬性圖</a>
-
-                            </li>
-                        </ul>
                                                         
-                                                            
-        
-                        <div class="tab-content" :id="'myTabContent'+item.Info.id">
-
-                                <div class="tab-pane fade show active" :id="'cloud'+item.Info.id" role="tabpanel" :aria-labelledby="'cloud-tab'+item.Info.id">
-                                    <div class="container">
-
-                                        <!-- wordcloud -->
-                                        <div class="wordcloud row">
-                                            <div class="btns modal-body col-md-2">
-                                                <div class="align-self-center">
-                                                    
-                                                    <ul v-for="geng in item.Geng" v-bind:key="geng.name" class="geng-button list-group list-group-horizontal-sm">
+                                                        <p class="col-md-3">留言量:<br>
+                                                        [[item.Info.commentCount]] </p>  
                                                         
-                                                        <button v-for="(geng_value,geng_name) in geng" 
-                                                        v-bind:key="geng_value.time"
-                                                        type="button" class="list-group-item  list-group-item-action text-center" :onclick=`player${item.Info.id.replace('-','')}.seekTo(${geng_value.time-3},true);location.href='#youtube${item.Info.id}'`>[[geng_name]]</button>
                                                         
-                                                    </ul>
-
-                                                </div>
+                                            <div class="col-md-3 offset-md-3 text-right text-nowrap">
+                                                    <svg width="1.5em" height="1.8em" viewBox="0 0 16 16" class="bi bi-hand-thumbs-up" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" d="M6.956 1.745C7.021.81 7.908.087 8.864.325l.261.066c.463.116.874.456 1.012.965.22.816.533 2.511.062 4.51a9.84 9.84 0 0 1 .443-.051c.713-.065 1.669-.072 2.516.21.518.173.994.681 1.2 1.273.184.532.16 1.162-.234 1.733.058.119.103.242.138.363.077.27.113.567.113.856 0 .289-.036.586-.113.856-.039.135-.09.273-.16.404.169.387.107.819-.003 1.148a3.163 3.163 0 0 1-.488.901c.054.152.076.312.076.465 0 .305-.089.625-.253.912C13.1 15.522 12.437 16 11.5 16v-1c.563 0 .901-.272 1.066-.56a.865.865 0 0 0 .121-.416c0-.12-.035-.165-.04-.17l-.354-.354.353-.354c.202-.201.407-.511.505-.804.104-.312.043-.441-.005-.488l-.353-.354.353-.354c.043-.042.105-.14.154-.315.048-.167.075-.37.075-.581 0-.211-.027-.414-.075-.581-.05-.174-.111-.273-.154-.315L12.793 9l.353-.354c.353-.352.373-.713.267-1.02-.122-.35-.396-.593-.571-.652-.653-.217-1.447-.224-2.11-.164a8.907 8.907 0 0 0-1.094.171l-.014.003-.003.001a.5.5 0 0 1-.595-.643 8.34 8.34 0 0 0 .145-4.726c-.03-.111-.128-.215-.288-.255l-.262-.065c-.306-.077-.642.156-.667.518-.075 1.082-.239 2.15-.482 2.85-.174.502-.603 1.268-1.238 1.977-.637.712-1.519 1.41-2.614 1.708-.394.108-.62.396-.62.65v4.002c0 .26.22.515.553.55 1.293.137 1.936.53 2.491.868l.04.025c.27.164.495.296.776.393.277.095.63.163 1.14.163h3.5v1H8c-.605 0-1.07-.081-1.466-.218a4.82 4.82 0 0 1-.97-.484l-.048-.03c-.504-.307-.999-.609-2.068-.722C2.682 14.464 2 13.846 2 13V9c0-.85.685-1.432 1.357-1.615.849-.232 1.574-.787 2.132-1.41.56-.627.914-1.28 1.039-1.639.199-.575.356-1.539.428-2.59z"/>
+                                            </svg> [[item.Info.likeCount]]
                                             </div>
-
-                                            <div class="chart modal-body col-md-10" :vid=`${item.Info.id}`>
-                                                <!-- bubble chart -->
-                                                
                                             </div>
-                                        </div>
-
-                                    </div>                            
-                                </div>
-
-                                <!-- radar chart -->
-                                <div class="tab-pane fade" :id="'radar'+item.Info.id" role="tabpanel" :aria-labelledby="'radar-tab'+item.Info.id">
-                                    <div class="radar modal-body" :vid="item.Info.id">
-                                        <canvas id="radarChart"></canvas>
-                                
-                                            <!-- radar chart -->
-                                        
-                                    </div>                            
-                                </div>
-
-                        </div>
-                    </div>                        
-                </div>
-                                                
-                                            
-
-                                                <a :href="'https://www.youtube.com/channel/'+item.Cid" class="btn btn-primary">Go to Channel</a>
-                                            
-                                        </div>
-                                        
-                                        </div>
-
                                     
-                                </div>   
-                                                
+
+                                            </div>
+                                            </div>
+            
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <ul class="nav nav-tabs" :id="'myTab'+item.Info.id" role="tablist">
+                                <!--
+                                <li class="nav-item" role="presentation">
+                                <a class="nav-link active" :id="'geng-tab'+vid" data-toggle="tab" :href="'#geng'+vid" role="tab" :aria-controls="'geng'+vid" aria-selected="true">梗在這呢</a>
+                                </li>
+                                -->
+                                <li class="nav-item" role="presentation">
+                                <a class="nav-link" :id="'cloud-tab'+item.Info.id" data-toggle="tab" :href="'#cloud'+item.Info.id" role="tab" :aria-controls="'cloud'+item.Info.id" aria-selected="false">大家都說</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                <a class="nav-link" :id="'radar-tab'+item.Info.id" data-toggle="tab" :href="'#radar'+item.Info.id" role="tab" :aria-controls="'radar'+item.Info.id" aria-selected="false" @click=" renderRadarChart(item.Info.id)">屬性圖</a>
+
+                                </li>
+                            </ul>
+                                                            
+                                                                
+            
+                            <div class="tab-content" :id="'myTabContent'+item.Info.id">
+
+                                    <div class="tab-pane fade show active" :id="'cloud'+item.Info.id" role="tabpanel" :aria-labelledby="'cloud-tab'+item.Info.id">
+                                        <div class="container">
+
+                                            <div class="wordcloud row">
+                                                <div class="btns modal-body col-md-2">
+                                                    <div class="align-self-center">
+                                                    
+                                                        <ul v-for="geng in item.Geng" v-bind:key="geng.name" class="geng-button list-group list-group-horizontal-sm">
+                                                            
+                                                            <button v-for="(geng_value,geng_name) in geng" 
+                                                            v-bind:key="geng_value.time"
+                                                            type="button" class="list-group-item  list-group-item-action text-center" :onclick=`player${item.Info.id.replace('-','')}.seekTo(${geng_value.time-3},true);location.href='#youtube${item.Info.id}'`>[[geng_name]]</button>
+                                                            
+                                                        </ul>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="chart modal-body col-md-10" :vid=`${item.Info.id}`>
+
+                                                    <!-- bubble chart -->
+                                                    
+                                                </div>
+                                            </div>
+
+                                        </div>                            
+                                    </div>
+
+                                    <div class="tab-pane fade" :id="'radar'+item.Info.id" role="tabpanel" :aria-labelledby="'radar-tab'+item.Info.id">
+                                        <div class="radar modal-body"  :vid=item.Info.id>
+                                            
+                                            
+                                            <canvas class="radar" :id=item.Info.id ></canvas>
+                                    
+                                                <!-- radar chart -->
+                                            
+                                        </div>                            
+                                    </div>
+
                             </div>
-                                
-                        
+                        </div>                        
+                    </div>
+                                                    
+                                                
+
+                                                    <a :href="'https://www.youtube.com/channel/'+item.Cid" class="btn btn-primary">Go to Channel</a>
+                                                
+                                            </div>
+                                            
+                                            </div>
+
+                                        
+                                    </div>   
+                                                    
+                                </div>
+                                    
+                            
+                            </div>
+                    
                         </div>
-                
+                        
                     </div>
 
-                    
+
+                    <nav aria-label="Page navigation" style="margin-top: 10;">
+                        <ul class="pagination justify-content-center pagination-lg">
+                        <li class="page-item">
+                            <a class="page-link" href="#demo" tabindex="-1" @click="change_page(-1);" style="margin: 0 20;">Prev</a>
+                        </li>
+                        <li class="page-item" v-for="(page, index) in cur_pages" :key="page">
+                            <a class="page-link" :id="'page'+page" href="#demo" @click="set_page(page)">[[page]]</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="#demo" @click="change_page(1);" style="margin: 0 20;">Next</a>
+                        </li>
+                        </ul>
+                    </nav>
                 </div>
 
-                        
-                <nav aria-label="Page navigation" style="margin-top: 10;">
-                    <ul class="pagination justify-content-center pagination-lg">
-                      <li class="page-item">
-                        <a class="page-link" href="#demo" tabindex="-1" @click="change_page(-1);" style="margin: 0 20;">Prev</a>
-                      </li>
-                      <li class="page-item" v-for="(page, index) in cur_pages" :key="page">
-                          <a class="page-link" :id="'page'+page" href="#demo" @click="set_page(page)">[[page]]</a>
-                      </li>
-                      <li class="page-item">
-                        <a class="page-link" href="#demo" @click="change_page(1);" style="margin: 0 20;">Next</a>
-                      </li>
-                    </ul>
-                </nav>
-
+                <div v-if="loading==1" id="loading-page" class="loading ld-modal">
+                    <div class="spinner-border text-danger" role="status">
+                        <span class="sr-only">Loading...</span>
                     </div>
+                </div>
+                
+            </div>
 
 
             </section>
@@ -467,15 +501,15 @@
 
    
 
-    <!--
+
             <footer>
                 
                 
                 <div class="container" >
                     <div class='row'>
                         <div class='col-md-4 text-left'>
-                            <!-- relative path
-                            <img src='./img/brand.png'>
+                            <!-- relative path -->
+                            <img src="img/brand.png">
                         </div>
                         <div class='col-md-4 text-left'>
                             <h4>連結</h4>
@@ -500,17 +534,22 @@
             
 
             </footer>
-        -->
 
         </div>
 
         <!-- relative path -->
-        <script type="text/javascript" src="./js/wordcloud.js"></script>
-        <script type="text/javascript" src="./js/vue-app.js"></script>
-        <script type="text/javascript" src="./js/util.js"></script>
-        <script type="text/javascript" src="./js/chart.js"></script>
+        <!-- relative path -->
+        <script type="text/javascript" src="js/wordcloud.js"></script>
+        <script type="text/javascript" src="js/vue-app.js"></script>
+        <script type="text/javascript" src="js/util.js"></script>
 
         <script>
+            //var yt_bind;
+
+            $('#demo .modal.fade').on('hidden.bs.modal', function () {
+                window[yt_bind].stopVideo();
+            });
+
             $("#demo .geng-button").on("mouseenter", function(){
                 $("."+$(this).text().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, '')+" circle").addClass("selected-comment");
             })
@@ -522,7 +561,14 @@
             $(function () {
                 $('[data-toggle="tooltip"]').tooltip()
             })
+
+            $("#search-box").keyup(function(event) {
+                if (event.keyCode === 13) {
+                    $("#search-button").click();
+                }
+            });
         </script>
+        
     </body>
 
 
