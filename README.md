@@ -79,6 +79,18 @@
 * change the way of binding wordcloud (Now by clicking Proto Objects)
 * in "Watch", "max_page" of pagination depends on the change of "result_items"
 
+### Some UX
+* Hover content of each comments (Interactable Bubble Chart)
+* Display data ralated to current "Sorting Mode" on proto
+* Add icons that tell you where did each search result come from
+* Filter implementation
+
+### Fixed bugs
+* Bug 1: When cur_page is out of range of pages we can see, set_page(1) would occurs error
+* Bug 2: After Searching, results should be sorted by searching engine instead of default sort_mode
+* Bug 3: Youtue videos at Modal will keep playing even after closing the Modal 
+* Warning 1: Because of out-lier's huge view count, others' bar chart at proto would be too small. So we use Log for smoothing
+
 # Note
 ### bootstrap
 
