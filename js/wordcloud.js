@@ -22,14 +22,33 @@ function hexToRgb(hex) {
   } : null;
 }
 
+tip = d3.tip().attr('class', 'd3-tip').attr('style', "z-index: 100000;").html(
+  d => 
+  `
+  <div class="tip media text-wrap" style="background-color: white; width: 25rem; border: 3px grey solid;">
+    <img src=${d.data.photo} class="align-self-start mr-3">
+    <div class="media-body">
+      <h5 class="mt-0">${d.data.author}</h5>
+      <p>${d.data.name}</p>
+    </div>
+  </div>
+  `
+);
+
 chart = (data, btns) => {
 
-  color = d3.scaleOrdinal(data.map(d => d.group), d3.schemeCategory10)
+  //color = d3.scaleOrdinal(data.map(d => d.group), d3.schemeCategory10)
+  //color = d3.scaleOrdinal(data.map(d => d.group), d3.schemeRdYlGn[5])
+  color = d3.scaleOrdinal([4,3,2,1,0], d3.schemeRdYlGn[5])
+  color_index = {}
 
   btns.selectAll("button")
       .each(function(){
         var txt = d3.select(this).text();
-        var rgb_item = hexToRgb(color(txt));
+        var weight = d3.select(this).attr("weight");
+        color_index[txt] = weight;
+        
+        var rgb_item = hexToRgb(color(weight));
         var rgb_color = "rgba("+rgb_item['r']+","+rgb_item['g']+","+rgb_item['b']+",0.7)"
         d3.select(this).attr("style","margin: 8 0;background-color:"+rgb_color);
       })
@@ -47,6 +66,11 @@ chart = (data, btns) => {
 
       //svg.append("filter").attr("id","shadow").append("feDropShadow").attr("dx", 0.2).attr("dy", 0.4).attr("stdDeviation", 0.1);
 
+  if(data.length == 0)
+      return svg.node();
+  
+  svg.call(tip);
+
   const leaf = svg.selectAll("g")
     .data(root.leaves(), d => d)
     .join("g")
@@ -57,11 +81,14 @@ chart = (data, btns) => {
       .attr("id", d => (d.leafUid = uid("leaf")).id)
       .attr("r", d => d.r)
       .attr("fill-opacity", 0.7)
-      .attr("fill", d => color(d.data.group))
-      .attr("data-toggle", "tooltip")
-      .attr("data-container", "body")
-      .attr("data-placement", "bottom")
-      .attr("title", d => d.data.name);
+      .attr("fill", d => color(color_index[d.data.group]))
+      .attr("stroke", "grey")
+      .attr("stroke-width", "2px")
+      .attr("stroke-linecap", "round")
+      .on('mouseover', tip.show)
+      .on('mouseout', tip.hide);
+    
+  //leaf.append()
 
   leaf.append("clipPath")
       .attr("id", d => (d.clipUid = uid("clip")).id)
@@ -70,6 +97,8 @@ chart = (data, btns) => {
 
   leaf.append("text")
       .attr("clip-path", d => d.clipUid)
+      .on('mouseover', tip.show)
+      .on('mouseout', tip.hide)
     .selectAll("tspan")
     .data(d => d.data.name.split(/(?=[A-Z][a-z])|\s+/g))
     .join("tspan")

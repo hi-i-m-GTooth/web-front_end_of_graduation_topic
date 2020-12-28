@@ -40,8 +40,8 @@ var vm = new Vue({
         //allMode: 所有mode數量 
         rangeOutput: "滑動拉桿選取娛樂程度",
         rangeValue: 0,
-        view_count_max: 1,
-        like_count_max: 1,
+        //view_count_max: 1,
+        //like_count_max: 1,
 
 
 
@@ -53,13 +53,35 @@ var vm = new Vue({
         consoleTest(text){
           console.log(text);
         },
-        returnTmp(){
-          this.items = this.tmp_items;
+        returnHome(){
+          this.buffer_items = [];
+          this.tmp_items = [];
+
+          //video_IDs = ["F7Jw5yn2-Rw","00w3Yf9gJlU","075Y1XWUn30","09X9_Hesn5o","0A3Iilngu_g","0B1DyDd6SCg"]
+          video_IDs = Object.keys(this.items);
+
+          //console.log(res);
+
+          for (var i=0;i<video_IDs.length;i++){
+              this.result_items.push(this.items[video_IDs[i]]);
+              this.buffer_items.push(this.items[video_IDs[i]]);
+          }
+
+          //this.max_page = ( (Object.keys(this.buffer_items).length-1)/this.pagination_num << 0 ) + 1;
+          this.changeSortMode("娛樂程度");
+          //this.set_page(1);
+        },
+
+        myLog(x, y){
+          var x = parseFloat(x);
+          var y = parseFloat(y);
+          return Math.log(x)/Math.log(y);
         },
 
         startLoading(){
           /*var loading_page = document.getElementById("loading-page");
           loading_page.classList.add("loading");*/
+          this.set_page(1);
           this.loading = 1;
         },
         endLoading(){
@@ -74,6 +96,7 @@ var vm = new Vue({
      
         bindYt(_to_bind){
           yt_bind = _to_bind;
+          console.log("bind to control "+_to_bind);
         },
 
         changeSortMode(_mode){
@@ -107,15 +130,15 @@ var vm = new Vue({
             })
           }
           else if(_mode=="觀看次數"){
-            var tmp = Object.values(this.buffer_items);
-            this.view_count_max = Math.max(...tmp.map(i => i.Info.viewCount));
+            //var tmp = Object.values(this.buffer_items);
+            //this.view_count_max = Math.max(...tmp.map(i => i.Info.viewCount));
             this.buffer_items.sort(function(first, second){
               return second.Info.viewCount - first.Info.viewCount;
             })
           }
           else if(_mode=="按讚數量"){
-            var tmp = Object.values(this.buffer_items);
-            this.like_count_max = Math.max(...tmp.map(i => i.Info.likeCount));
+            //var tmp = Object.values(this.buffer_items);
+            //this.like_count_max = Math.max(...tmp.map(i => i.Info.likeCount));
             this.buffer_items.sort(function(first, second){
               return second.Info.likeCount - first.Info.likeCount;
             })
@@ -170,16 +193,16 @@ var vm = new Vue({
         },
         
         set_page(_num){
-          console.log(this.sort_mode);
+          //console.log(this.sort_mode);
           var num = parseInt(_num);
           if(num>0 && num<=this.max_page){
             var element = document.getElementById("page"+this.cur_page);
             element.className = element.className.replace(/\bactive2\b/g, "");
             this.cur_page = num;
-            var element = document.getElementById("page"+this.cur_page);
-            element.classList.add("active2");
-            this.tmp_items = this.buffer_items.slice((this.cur_page-1)*this.pagination_num, (this.cur_page-1)*this.pagination_num+(this.pagination_num-1)+1);
             this.follow_cur_page();
+            var element = null;
+            setTimeout(t => {element = document.getElementById("page"+this.cur_page);element.classList.add("active2");},10);
+            this.tmp_items = this.buffer_items.slice((this.cur_page-1)*this.pagination_num, (this.cur_page-1)*this.pagination_num+(this.pagination_num-1)+1);
           }
         },
 
@@ -195,6 +218,7 @@ var vm = new Vue({
           }
           else{
             this.cur_pages = Array.from(Array(this.pagination_num), (x, index) => index+this.cur_page-(this.pagination_num+1)/2+1);
+            console.log("Renew pages!");
           }
         },
 
@@ -208,7 +232,7 @@ var vm = new Vue({
           .each(function(d,i){
               var btns_this = d3.select(this).select(".btns");
               var vid = d3.select(this).select(".chart").attr("vid");
-              if(global_this.items[vid]["Word_Cloud"]!=undefined){
+              if(global_this.items[vid]["Word_Cloud"].length >= 0){
                 if(d3.select(this).select(".chart svg").empty()){
                   d3.select(this).select(".chart").node()
                     .appendChild(chart(global_this.items[vid]["Word_Cloud"], btns_this))
@@ -248,7 +272,8 @@ var vm = new Vue({
             global_this.result_items = video_info_obj;
             global_this.buffer_items = video_info_obj;
 
-            this.changeSortMode(this.sort_choice_list[0]);
+            //this.changeSortMode(this.sort_choice_list[0]);
+            this.changeSortMode("搜尋結果");
             console.log("|||||||||||||||||||||||||||  End Query  |||||||||||||||||||||||||");
             this.endLoading();
             this.endSearchShake();
@@ -263,7 +288,7 @@ var vm = new Vue({
 
         endSearchShake(){
           var tags = document.getElementById("search-bar").getElementsByClassName("tags");
-          Array.prototype.map.call(tags, item => item.className.replace(/\bshakinging\b/g, ""));
+          Array.prototype.map.call(tags, item => {item.className.baseVal = item.className.baseVal.replace(/\bshaking\b/g, "")});
         },
 
         vidQuery(vid){ //return data 
@@ -451,23 +476,7 @@ var vm = new Vue({
 
 
     mounted: function(){  // 隨機選出n部影片呈現給使用者
-          this.buffer_items = [];
-          this.tmp_items = [];
-          var ttmp = [];
-
-          video_IDs = ["F7Jw5yn2-Rw","00w3Yf9gJlU","075Y1XWUn30","09X9_Hesn5o","0A3Iilngu_g","0B1DyDd6SCg"]
-
-          //console.log(res);
-
-          for (var i=0;i<video_IDs.length;i++){
-              this.result_items.push(this.items[video_IDs[i]]);
-              this.buffer_items.push(this.items[video_IDs[i]]);
-          }
-
-          this.max_page = ( (Object.keys(this.buffer_items).length-1)/this.pagination_num << 0 ) + 1;
-          this.changeSortMode(this.sort_mode);
-          this.set_page(1);
-
+          this.returnHome();
           //console.log(this.connectivity_max);
           //console.log(this.tmp_items)
     },
@@ -478,6 +487,11 @@ var vm = new Vue({
         this.max_page = ( (Object.keys(this.buffer_items).length-1)/this.pagination_num << 0 ) + 1;
         console.log("新的最大頁數："+this.max_page);
         this.set_page(1);
+
+        /*document.getElementsByClassName('#demo .modal.fade').addEventListener('hidden.bs.modal', function () {
+          window[yt_bind].stopVideo();
+          console.log("Stoped "+yt_bind);
+        });*/
       },
 
     },
@@ -503,6 +517,12 @@ var vm = new Vue({
       entertain_interval: function(){
         return this.entertainment_value_max/5;
       },
+      view_count_max: function(){
+        return Math.max(...this.tmp.map(i => i.Info.viewCount));
+      },
+      like_count_max: function(){
+        return Math.max(...this.tmp.map(i => i.Info.likeCount));
+      }
     },
 
 });
